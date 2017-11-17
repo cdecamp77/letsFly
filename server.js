@@ -5,10 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// load the env vars
+require('dotenv').config();
+
+// create the Express app
+var app = express();
+
+// connect to the MongoDB with mongoose
+require('./config/database');
+
+// require our routes
 var index = require('./routes/index');
 var users = require('./routes/users');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
