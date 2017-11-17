@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport');
 // load the env vars
 require('dotenv').config();
 
@@ -13,6 +14,7 @@ var app = express();
 
 // connect to the MongoDB with mongoose
 require('./config/database');
+require('./config/passport');
 
 // require our routes
 var index = require('./routes/index');
@@ -33,6 +35,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
