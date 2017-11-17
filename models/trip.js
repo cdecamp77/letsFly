@@ -2,7 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var tripSchema = new Schema ({
-
+  departureCity: {type: String, required: true},
+  arrivalCity: {type:String, required: true},
+  travelers: {type: String, required: true},
+  flights: {type: Schema.Types.ObjectId, ref: 'Flight'},
+  hotels: {type: Schema.Types.ObjectId, ref: 'Hotel'}
   },
   {
     timestamps: true
