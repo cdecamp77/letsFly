@@ -7,21 +7,21 @@ function root (req, res) {
 }
 
 function flightSearch (req, res) {
-    res.render('/flights/search', { user: req.user });
+    res.render('./flights/search', { user: req.user });
 }
 
 function hotelSearch (req, res) {
-    res.render('/hotels/search', { user: req.user });
+    res.render('./hotels/search', { user: req.user });
 }
 
 function index (req, res) {
     Trip.find({}).populate('Flight').populate('Hotel').exec((err, trips) => {
-        res.render('/users/dash', { trips, user: req.user });
+        res.render('./users/dash', { trips, user: req.user });
     });
 }
 
 function insp (req, res) {
-    res.render('/inspirations/insp', { user: req.user });
+    res.render('./inspirations/insp', { user: req.user });
 }
 
 
