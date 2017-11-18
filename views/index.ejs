@@ -3,18 +3,16 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   </head>
-  <body>
-      <a href="" class="brand-logo left"></a>
-      <!-- new html below -->
-      <ul class="right">
-       
-        <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+  <body class="bg">
+    <div>
+      <a class="waves-effect waves-light btn">Missed My Flight</a>
+      <a class="waves-effect waves-light btn">Random Vacation</a>
+    </div>
+
      
-        <li><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></li>
-      
-      </ul>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    </body>
 </html>
+

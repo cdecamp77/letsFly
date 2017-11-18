@@ -1,8 +1,28 @@
-body {
-  padding: 50px;
+/* body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+} */
+html, body {
+      height: 100%;
 }
+
+.bg {
+  background-image: url("https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/egzon-bytyqi-310216.jpg");
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover !important; 
+  background-color: rgb(173, 173, 173);
+  /* background-blend-mode: multiply; */
+}
+
+/* @media only screen and (min-width: 400px) {
+  .bg {
+    background-image: url("https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/egzon-bytyqi-310216.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+} */

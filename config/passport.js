@@ -1,4 +1,5 @@
 var passport = require('passport');
+var User = require('../models/user');
 
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
