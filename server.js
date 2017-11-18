@@ -19,6 +19,7 @@ require('./config/passport');
 // require our routes
 var index = require('./routes/index');
 var users = require('./routes/users');
+var flights = require('./routes/trips');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
