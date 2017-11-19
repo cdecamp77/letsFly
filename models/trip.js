@@ -6,6 +6,7 @@ var tripSchema = new Schema ({
   arrivalCity: {type:String, required: true},
   travelers: {type: String, required: true, default: "1"},
   active: {type: Boolean, default: true},
+  booked: {type: Boolean, defualt: false},
   flights: [{type: Schema.Types.ObjectId, ref: 'Flight'}],
   hotels: [{type: Schema.Types.ObjectId, ref: 'Hotel'}]
   },
