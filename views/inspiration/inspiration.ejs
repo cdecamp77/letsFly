@@ -21,11 +21,28 @@
       </form>
     </div>
   </div>
+  <% if (destinationResults) { %>
   <div class="container" id="results">
-    
+    <p><%= destinationResults.results[0].destination %></p>
+    <button id="edit-search" class="btn">Change Search</button>
   </div>
+  <% } %>
 </main>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
-<script src="javascripts/appInspirationSearch.js"></script>
+<script>
+  var destinationResults = <%- JSON.stringify(destinationResults) %>;
+  
+  if (destinationResults) {
+    $('#search').hide();
+  }
+
+  // event listeners
+
+  $('#edit-search').on('click', (evt) => {
+    $('#search').show();
+    $('#results').hide();
+  });
+</script>
+
 
 <%- include ../footer.ejs %>
