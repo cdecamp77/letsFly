@@ -1,4 +1,4 @@
-
+<%- include ../header.ejs %>
 <h1> Hotel search</h1>
 <div class="container">
     <div class="row">
@@ -8,11 +8,12 @@
                     <p id="out"></p>
                 </div>
             </div>
+        <!-- <p id="cityResult"></p> -->
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="out" type="text" class="validate">
-                    <label for="departure_city">Departure City</label>
+                    <input id="cityResult" type="text" class="validate">
+                    <label class="active" for="arrival_city">Departure City</label>
                 </div>
             </div>
             <div class="row">
@@ -29,8 +30,8 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input value="1" id="passengers" type="number" class="validate">
-                    <label class="active" for="passengers">Number of Passengers</label>
+                    <input value="1" min="1" id="passengers" type="number" class="validate">
+                    <label  for="passengers">Number of Passengers</label>
                 </div>
             </div>
         </form>
@@ -38,7 +39,7 @@
 </div>  
 
 <!-- geolocator test -->
-<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
 <script type="text/javascript"> 
   var geocoder;
 
@@ -69,23 +70,23 @@ function errorFunction(){
     geocoder.geocode({'latLng': latlng}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
       console.log(results)
-        if (results[1]) {
+        if (results[3]) {
          //formatted address
-         alert(results[0].formatted_address)
-        //find country name
-             for (var i=0; i<results[0].address_components.length; i++) {
-            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+         var cityResult = document.getElementById("cityResult");cityResult.value = results[3].formatted_address;
+        // //find country name
+        //      for (var i=0; i<results[0].address_components.length; i++) {
+        //     for (var b=0;b<results[0].address_components[i].types.length;b++) {
 
-            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
-                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
-                    //this is the object you are looking for
-                    city= results[0].address_components[i];
-                    break;
-                }
-            }
-        }
+        //     //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+        //         if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+        //             //this is the object you are looking for
+        //             city= results[0].address_components[i];
+        //             break;
+        //         }
+        //     }
+        // }
         //city data
-        alert(city.short_name + " " + city.long_name)
+        // alert(city.short_name + " ")
 
 
         } else {
@@ -98,7 +99,7 @@ function errorFunction(){
   }
 </script> 
 </head> 
-<body onload="initialize()">  -->
+<body onload="initialize()">  
 
 
 
@@ -141,3 +142,4 @@ function geoFindMe() {
   navigator.geolocation.getCurrentPosition(success, error);
 }
 </script> 
+<%- include ../footer.ejs %>
