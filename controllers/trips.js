@@ -1,6 +1,7 @@
 var Trip = require('../models/trip');
 var Hotel = require('../models/hotel');
 var Flight = require('../models/flight');
+var request = require('request');
 
 function root (req, res) {
     res.render('index', { user: req.user });
@@ -21,7 +22,9 @@ function index (req, res) {
 }
 
 function insp (req, res) {
-    res.render('./inspirations/insp', { user: req.user });
+    var searchCompleted = req.body.departureCity;
+    if (!searchCompleted) res.render('./inspirations/insp', { user: req.user });
+    // `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${$('#departure_city').val()}`
 }
 
 
