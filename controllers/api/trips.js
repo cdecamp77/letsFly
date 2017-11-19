@@ -1,9 +1,4 @@
-var Trip = require('../models/trip');
-
-function index(req, res) {
-    res.render('index');
-    
-}
+var Trip = require('../../models/trip');
 
 function getAllTrips(req, res) {
     Trip.find({}, function(err, trips) {
@@ -17,10 +12,7 @@ function getOneTrip(req, res) {
     });
 }
 
-
-
 module.exports = {
-    index,
     getAllTrips,
     getOneTrip 
 }

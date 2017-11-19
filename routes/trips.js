@@ -1,15 +1,11 @@
-// var express= require('express');
-// var router = express.Router();
-// var tripsCtrl = require('../controllers/trips');
+var express= require('express');
+var router = express.Router();
+var tripsCtrl = require('../controllers/trips');
 
-// router.get('/', tripsCtrl.index);
-// router.get('/flights/search', tripsCtrl.search);
-// router.get('/hotels/search', hotelCtrl.search);
-// router.get('/trips', tripsCtrl.show);
+router.get('/', tripsCtrl.root);
+router.get('/flights/search', tripsCtrl.flightSearch);
+router.get('/hotels/search', tripsCtrl.hotelSearch);
+router.get('/trips', tripsCtrl.index);
+router.get('/inspirations', tripsCtrl.insp);
 
-// router.get('/inspiration', tripsCtrl.insp);
-
-// router.get('/flights/search', function(req,res){
-//     res.render('spin');
-//   })
-// module.exports = router;
+module.exports = router;
