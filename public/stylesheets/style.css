@@ -6,7 +6,7 @@ a {
   color: #00B7FF;
 } */
 html, body {
-      height: 100%;
+  height: 100%;
 }
 
 .bg {
@@ -18,7 +18,15 @@ html, body {
   background-color: rgb(173, 173, 173);
   /* background-blend-mode: multiply; */
 }
-
+#logo img{
+  max-width: 300px;
+  max-height: 390px;
+  align-content: center;
+  margin: 30px;
+}
+nav, footer{
+  background-color: #68B3AB !important;
+}
 /* @media only screen and (min-width: 400px) {
   .bg {
     background-image: url("https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/egzon-bytyqi-310216.jpg");
