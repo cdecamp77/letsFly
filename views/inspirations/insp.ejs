@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <title>Get Inspired</title>
-</head>
-<body>
-  <header>
-
-  </header>
+<%- include header.ejs %>
   <main>
-    <div class="container">
-      
+    <div class="container" id="search">
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="departure_city" type="text" class="validate">
+              <label for="departure_city">Departure City</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="destination" type="text" class="validate">
+              <label for="destination">Destination (Optional)</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <input type="button" class="btn white-text" onclick="searchInspirations()" value="Search!">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container" id="results">
+
     </div>
   </main>
-  <footer>
-
-  </footer>
-</body>
-</html>
+<%- include footer.ejs %>
