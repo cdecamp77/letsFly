@@ -26,7 +26,11 @@ function insp (req, res) {
 }
 
 function getAmadeusData (req, res) {
-
+    var body = req.body;
+    request({ url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.origin}&destination=${body.destination}`}, (err, response, body) => {
+        var searchResults = JSON.parse(body);
+        res.json(searchResults);
+    });
 }
 
 
@@ -36,5 +40,6 @@ module.exports = {
     flightSearch,
     hotelSearch,
     index,
-    insp
+    insp,
+    getAmadeusData
 }
