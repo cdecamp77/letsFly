@@ -35,6 +35,7 @@
       <div class="section white">
         <div class="row container">
           <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
+          <button id="new-destination" onclick="getNewDestination()" class="btn">Edit Search!</button>
           <h2 class="header"><%%= currentDestination.city.name %></h2>
           <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
         </div>
@@ -61,7 +62,6 @@
     if (screenMode === "search") {
       return;
     } else if (screenMode === "destinationView") {
-      getCurrentDestinationDetails(currentDestination);
       $('#search').hide();
       $('#destination-display').html(template({currentDestination})).show();
       $('.parallax').parallax();
@@ -74,7 +74,7 @@
   function submitInspirationSearch() { 
     if ( !$('#departure-city').val() ) return;
     
-    fetch('/inspiration', {
+    fetch('/inspiration/search', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -85,14 +85,26 @@
       destinationResults = data.results;
       currentDestination = destinationResults[0];
       screenMode = "destinationView";
-      console.log(currentDestination)
       render();
     });
   }
 
-  function getCurrentDestinationDetails(destination) {
-    currentDestination.city;
-    // fetch(`http://wikitravel.org//wiki/en/api.php?action=parse&format=json&page=${city}&prop=wikitext`)
+  function getNewDestination(destination) {
+    var newDestinationIndex = getRandomInt(0, destinationResults.length - 1);
+    currentDestination = destinationResults[newDestinationIndex];
+    console.log(currentDestination)
+    fetch('/inspiration/new', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ newDestination: currentDestination })
+    })
+    .then(res => res.json())
+    .then(data => {
+      currentDestination = destinationResults[newDestinationIndex] = data;
+      screenMode = "destinationView";
+      render();
+    });
   }
 
   function editSearch() {
@@ -102,6 +114,10 @@
   // $(document).ready(function(){
   //     $('.parallax').parallax();
   //   });
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 </script>
 
 
