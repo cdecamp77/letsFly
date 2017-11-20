@@ -22,14 +22,11 @@ function index (req, res) {
 }
 
 function insp (req, res) {
-    var searchCompleted = req.body.departureCity;
-    if (!searchCompleted) res.render('./inspirations/insp', { user: req.user });
-    
-    request({ url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${req.body.departureCity}`}, (err, response, body) => {
-        var destinationResults = JSON.parse(body);
-        console.log(destinationResults);
-        res.render('./inspirations/insp', {user: req.body.user, destinationResults}) 
-    });
+    res.render('./inspiration/inspiration', {user: req.body.user});
+}
+
+function getAmadeusData (req, res) {
+
 }
 
 
