@@ -22,10 +22,15 @@
     </div>
   </div>
   <% if (destinationResults) { %>
-  <div class="container" id="results">
-    <p><%= destinationResults.results[0].destination %></p>
-    <button id="edit-search" class="btn">Change Search</button>
-  </div>
+    <div class="parallax-container">
+      <div class="parallax"><img src="https://i.imgur.com/DtAdAcZ.jpg"></div>
+    </div>
+    <div class="section white">
+      <div class="row container">
+        <h2 class="header"><%= destinationResults.results[0].destination %></h2>
+        <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+      </div>
+    </div>
   <% } %>
 </main>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
@@ -42,7 +47,37 @@
     $('#search').show();
     $('#results').hide();
   });
+  function requestWeatherData() { 
+    //new AJAX request 
+    var xhr = new XMLHttpRequest(); 
+    //the Node.js server is running on a localhost, listening to port 3000 and has a function to handle requests made to /weatherdata 
+    xhr.open('POST', 'http://localhost:3000/weatherdata', true); 
+    xhr.setRequestHeader('Content-Type', 'application/json'); 
+    xhr.onload = function () { 
+      console.log(this.responseText); 
+    }; 
+    xhr.send(); 
+  };
+
+    function weatherAPIRequest (req, res) { 
+      //dummy coordinates 
+      var longLat = '43.6532,79.3832'; 
+      //here you store api key without it being exposed to the public 
+      var weatherApiURL = 'https://api.darksky.net/forecast/YOUR API KEY/' + longLat; 
+      //request module to handle routing of API request 
+      request(weatherApiURL, function (error, response, body) { 
+        if (error) { res.writeHead(500, 'Weather API request failed', {'content-type': 'text/plain'}); 
+        res.end(); 
+        return; 
+      } 
+      //the API request that the server made is now stored in the DarkSkyAPIData variable 
+      var DarkSkyAPIData = JSON.parse(body); 
+      //the server responds to the initial AJAX request the weather data 
+      res.send(DarkSkyAPIData); 
+    }); 
+  };
 </script>
+
 
 
 <%- include ../footer.ejs %>
