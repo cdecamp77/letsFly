@@ -40,6 +40,47 @@ main {
 nav, footer{
   background-color: #68B3AB !important;
 }
+.footer-copyright{
+  background-color: #68B3AB !important;
+}
+#myform {
+  text-align: center;
+  padding: 5px;
+  border: 1px dotted #ccc;
+  margin: 2%;
+}
+.qty {
+  width: 40px;
+  height: 25px;
+}
+.container {
+  padding: 0 0.5rem;
+  margin: 0 auto;
+  max-width: 100% !important;
+  width: 98%;
+}
+.section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.card {
+  position: relative;
+  overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  margin: 0.5rem 0 1rem 0;
+    margin-top: 0.5rem;
+    margin-right: 0px;
+    margin-bottom: 1rem;
+    margin-left;
+  background-color: #fff;
+  border-radius: 2px;
+}
+.flight-state {
+  padding-bottom: 15px;
+}
+input.qtyplus { width:25px; height:25px;}
+input.qtyminus { width:25px; height:25px;}
 /* @media only screen and (min-width: 400px) {
   .bg {
     background-image: url("https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/egzon-bytyqi-310216.jpg");

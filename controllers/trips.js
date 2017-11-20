@@ -36,5 +36,6 @@ module.exports = {
     flightSearch,
     hotelSearch,
     index,
-    insp
+    insp,
+    getAmadeusData
 }

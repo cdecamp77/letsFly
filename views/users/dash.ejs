@@ -1,0 +1,100 @@
+<%- include ../header.ejs %>
+
+<h1 class="deep-orange-text text-lighten-1 center"><%= user.name %>'s Dashboard</h1>
+
+<div class="container">
+    <div id="profile-page" class="section">
+        <div id="profile-page-header" class="card">
+            <figure class="card-profile-image">
+                <i class="small material-icons"><img src="<%= user.avatar %>" class="circle"></i>
+            </figure>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s3 offset-s2">
+                        <h4 class="card-title grey-text text-darken-4"><%= user.name %></h4>
+                    </div>
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">Trips</h4>
+                        <p class="medium-small grey-text">asdf</p>
+                    </div>
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">Trips</h4>
+                        <p class="medium-small grey-text">asdf</p>
+                    </div>
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">Trips</h4>
+                        <p class="medium-small grey-text">asdf</p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="flight-card" class="card">
+        <div class="card-header amber darker-2">
+            <div class="card-title">
+                <h4 class="flight-card-title">Your Next Flight</h4>
+                <p class="flight-card-date">June 18, Thu</p>
+            </div>
+        </div>
+        <div class="card-content-bg white-text">
+            <div class="card-content amber darker-1">
+                <div class="row flight-state-wrapper">
+                    <div class="col s2 m2 12 center-align">
+                        <div class="flight-state">
+                            <h4 class="margin grey-text">LDN</h4>
+                            <p class="ultra-small grey-text">London</p>
+                        </div>
+                    </div>
+                    <div class="col s2 m2 12 center-align">
+                            <i class="medium material-icons grey-text">flight_takeoff</i>
+                    </div>
+                    <div class="col s2 m2 12 center-align">
+                        <div class="flight-state">
+                            <h4 class="margin grey-text">LAX</h4>
+                            <p class="ultra-small grey-text">Los Angeles</p>
+                        </div>
+                    </div>    
+                </div>
+                <div class="row">
+                    <div class="col s6 m6 l6 center-align">
+                        <div class="flight-info">
+                            <p class="small grey-text">depart</p>
+                            <p class="small grey-text">flight</p>
+                            <p class="small grey-text">terminal</p>
+                        </div>
+                    </div>
+                    <div class="col s6 m6 l6 center-align flight-state-two">
+                        <div class="flight-info">
+                            <p class="small grey-text">depart</p>
+                            <p class="small grey-text">flight</p>
+                            <p class="small grey-text">terminal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+<div class="card">
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-tabs">
+          <ul class="tabs tabs-fixed-width">
+            <li class="tab"><a href="#test4">Test 1</a></li>
+            <li class="tab"><a class="active" href="#test5">Test 2</a></li>
+            <li class="tab"><a href="#test6">Test 3</a></li>
+          </ul>
+        </div>
+        <div class="card-content grey lighten-4">
+          <div id="test4">Test 1</div>
+          <div id="test5">Test 2</div>
+          <div id="test6">Test 3</div>
+        </div>
+      </div>
+    </div>

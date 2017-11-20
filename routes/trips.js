@@ -8,5 +8,6 @@ router.get('/hotels/search', tripsCtrl.hotelSearch);
 router.get('/trips', tripsCtrl.index);
 router.get('/inspirations', tripsCtrl.insp);
 router.post('/inspirations', tripsCtrl.getAmadeusData);
+router.get('/users/dash', tripsCtrl.index)
 
 module.exports = router;
