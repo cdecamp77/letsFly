@@ -35,8 +35,8 @@
       <div class="section white">
         <div class="row container">
           <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
-          <h2 class="header"><%%= currentDestination.destination %></h2>
-          <p class="grey-text text-darken-3 lighten-3">Lorem ipsum dolor sit amet, nec vivendum maiestatis ut, no has tale suas comprehensam. Id sit tota mundi, sint consetetur cu ius, no eam justo sonet conceptam. Mei cu volutpat posidonium, laudem aliquip vis ea, mea an suas falli delicatissimi. Mea quas insolens ad, justo expetendis ex usu. Eam harum graece adipiscing ne, omittam atomorum signiferumque at mei, inani invenire maiestatis vel ut. No graece populo nominati vix, an vis simul iudico integre. Ex ius timeam appareat voluptatibus. Ut sea integre laboramus, ad nec nominavi iracundia, vel quidam invenire eu. Recteque patrioque appellantur sed te, ut has quaeque democritum, ut integre assentior rationibus quo.</p>
+          <h2 class="header"><%%= currentDestination.city.name %></h2>
+          <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
         </div>
       </div>
   </script>
@@ -51,13 +51,17 @@
 <script>
   var destinationResults;
   var currentDestination;
+  var destinationDetails;
   var screenMode = "search";
   var template = _.template($('#destination-template').html());
+
+  
 
   function render() {
     if (screenMode === "search") {
       return;
     } else if (screenMode === "destinationView") {
+      getCurrentDestinationDetails(currentDestination);
       $('#search').hide();
       $('#destination-display').html(template({currentDestination})).show();
       $('.parallax').parallax();
@@ -81,8 +85,14 @@
       destinationResults = data.results;
       currentDestination = destinationResults[0];
       screenMode = "destinationView";
+      console.log(currentDestination)
       render();
     });
+  }
+
+  function getCurrentDestinationDetails(destination) {
+    currentDestination.city;
+    // fetch(`http://wikitravel.org//wiki/en/api.php?action=parse&format=json&page=${city}&prop=wikitext`)
   }
 
   function editSearch() {
