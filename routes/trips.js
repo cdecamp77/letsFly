@@ -7,6 +7,7 @@ router.get('/flights/search', tripsCtrl.flightSearch);
 router.get('/hotels/search', tripsCtrl.hotelSearch);
 router.get('/trips', tripsCtrl.index);
 router.get('/inspirations', tripsCtrl.insp);
-router.post('/inspirations', tripsCtrl.getAmadeusData);
+router.post('/inspiration/search', tripsCtrl.getInspirationData);
+router.post('/inspiration/new', tripsCtrl.updateInspirationData);
 
 module.exports = router;
