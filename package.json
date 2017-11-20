@@ -6,7 +6,9 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "airport-codes": "^1.0.2",
     "body-parser": "~1.18.2",
+    "city-to-coords": "^1.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^4.0.0",

@@ -2,6 +2,8 @@ var Trip = require('../models/trip');
 var Hotel = require('../models/hotel');
 var Flight = require('../models/flight');
 var request = require('request');
+var airports = require('airport-codes');
+var cityCoords = require('city-to-coords'); 
 
 function root (req, res) {
     res.render('index', { user: req.user });
@@ -29,12 +31,11 @@ function getAmadeusData (req, res) {
 
 }
 
-
-
 module.exports = {
     root, 
     flightSearch,
     hotelSearch,
     index,
-    insp
+    insp,
+    getAmadeusData
 }
