@@ -1,42 +1,53 @@
 <%- include ../header.ejs %>
 
-<h1> Flight search</h1>
+<h1 class="deep-orange-text text-lighten-1 center"> Flight Search</h1>
 <div class="container">
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12">
                     <input id="" type="text" class="validate">
                     <label for="dep_city">Departure City</label>
                 </div>
-                <div class="input-field col s6">
-                    <input id="arrival_city" type="text" class="validate">
-                    <label for="arrival_city">Arrival City</label>
-                </div>
             </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="arrival_city" type="text" class="validate">
+                        <label for="arrival_city">Arrival City</label>
+                    </div>
+                </div>
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s6">
                     <input id="dep_date" type="text" class="datepicker">
                     <label for="dep_date">Departure Date</label>
                 </div>
+            <div class="input-field col s6">
+                <input id="ret_date" type="text" class="datepicker">
+                <label for="ret_date">Return Date</label>
+            </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
-                    <input id="ret_date" type="text" class="datepicker">
-                    <label for="ret_date">Return Date</label>
+                <div class="input-field col s6">
+                    <select>
+                        <option value="" disabled selected>Number of Travelers</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                    <label>Travelers</label>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
-                    <input value="1" id="passengers" type="number" class="validate">
-                    <label class="active" for="passengers">Number of Passengers</label>
-                </div>
-            </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <button class="btn waves-effect waves-light" type="submit" name="action">Search
                 <i class="material-icons right"></i>
             </button>
+            </div>
         </form>
     </div>
+    <div class="divider"></div>
 </div>
 
 
@@ -49,6 +60,10 @@
         close: 'Ok',
         closeOnSelect: false // Close upon selecting a date,
     });
+
+    $(document).ready(function() {
+    $('select').material_select();
+  });
 </script>
 
 <%- include ../footer.ejs %>

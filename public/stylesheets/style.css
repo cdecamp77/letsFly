@@ -12,6 +12,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  min-height: 100vh;
 }
 main {
   flex: 1 0 auto;
@@ -31,6 +32,10 @@ main {
   max-height: 390px;
   align-content: center;
   margin: 60px;
+}
+.brand-logo {
+  margin-left: 20px;
+  color: #275E63 !important;
 }
 nav, footer{
   background-color: #68B3AB !important;

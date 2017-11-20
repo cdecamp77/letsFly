@@ -9,16 +9,16 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <title>Document</title>
+        <title>Let's Fly</title>
     </head>
     
-  <nav>
+  <nav class-"navbar-fixed">
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo">Let's Fly</a>
+      <a href="/" class="brand-logo"><i class="medium material-icons">flight</i>Let's Fly</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#!">Flight Search</a></li>
-        <li><a href="#!">Hotel Search</a></li>
+        <li><a href="flights/search">Flight Search</a></li>
+        <li><a href="hotels/search">Hotel Search</a></li>
         <li><a href="#!">Random Vacation</a></li>
         <% if (user) { %>
         <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
@@ -27,8 +27,11 @@
         <% } %>
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
+        <% if (user) { %>
         <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+        <% } else { %>
+        <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
+        <% } %>
         <li><a href="#!">Flight Search</a></li>
         <li><a href="#!">Hotel Search</a></li>
         <li><a href="#!">Random Vacation</a></li>
