@@ -1,18 +1,18 @@
 <%- include ../header.ejs %>
 
 <h1 class="deep-orange-text text-lighten-1 center"> Flight Search</h1>
-<div class="container">
+<div class="container" id="flightForm">
     <div class="row">
         <form class="col s12">
-            <div class="row">
+            <div class="row city">
                 <div class="input-field col s12">
-                    <input id="" type="text" class="validate">
-                    <label for="dep_city">Departure City</label>
+                    <input placeholder="" type="text" class="autocomplete_dep validate">
+                    <label class="active" for="dep_city">Departure City</label>
                 </div>
             </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="arrival_city" type="text" class="validate">
+                        <input id="arrival_city" type="text" class="autocomplete_d validate">
                         <label for="arrival_city">Arrival City</label>
                     </div>
                 </div>
@@ -41,28 +41,23 @@
                 </div>
             </div>
             <div class="row">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Search
-                <i class="material-icons right"></i>
+            <button id="flightSearch" class="btn waves-effect waves-light" type="submit" name="action">Search
             </button>
             </div>
         </form>
     </div>
+
 </div>
 
 
-<script>
-    $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year,
-        today: 'Today',
-        clear: 'Clear',
-        close: 'Ok',
-        closeOnSelect: false // Close upon selecting a date,
-    });
+<!-- search results -->
 
-    $(document).ready(function() {
-    $('select').material_select();
-  });
-</script>
+    <div class="divider"></div>
+</div>
+<div id="results" style="display:none">Search results populate here</div>
 
-<%- include ../footer.ejs %>
+<script src="/javascripts/autofill.js"></script>
+<script src="/javascripts/datepicker.js"></script>
+<script src="/javascripts/showFlightResults.js"></script>
+
+  <%- include ../footer.ejs %>  

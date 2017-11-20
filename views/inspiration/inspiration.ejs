@@ -1,81 +1,123 @@
 <%- include ../header.ejs %>
 <main>
-  <div class="container" id="search">
-    <div class="row">
-      <form class="col s12" action="/inspirations" method="POST">
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="departure_city" type="text" class="validate" name="departureCity">
-            <label for="departure_city">Departure City</label>
+  <section id="search">
+    <div class="container">
+      <div class="row">
+        <form class="col s12" action="/inspirations" method="POST">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="departure-city" type="text" class="validate">
+              <label for="departure-city">Departure City</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="destination" type="text" class="validate">
+              <label for="destination">Destination (Optional)</label>
+            </div>
           </div>
-          <div class="input-field col s6">
-            <input id="destination" type="text" class="validate" name="destination">
-            <label for="destination">Destination (Optional)</label>
+          <div class="row">
+            <div class="col s12">
+              <input type="button" onclick="submitInspirationSearch()" class="btn white-text" value="Search!">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <input type="submit" class="btn white-text" value="Search!">
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  <% if (destinationResults) { %>
-    <div class="parallax-container">
-      <div class="parallax"><img src="https://i.imgur.com/DtAdAcZ.jpg"></div>
-    </div>
-    <div class="section white">
-      <div class="row container">
-        <h2 class="header"><%= destinationResults.results[0].destination %></h2>
-        <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+        </form>
       </div>
     </div>
-  <% } %>
+  </section>
+  <section id="destination-display">
+      <!-- destination -->
+  </section>
+
+  <!-- underscore template for destination view -->
+  <script type="text/template" id="destination-template">
+      <div class="parallax-container">
+        <div class="parallax"><img src="https://i.imgur.com/DtAdAcZ.jpg"></div>
+      </div>
+      <div class="section white">
+        <div class="row container">
+          <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
+          <button id="new-destination" onclick="getNewDestination()" class="btn">Edit Search!</button>
+          <h2 class="header"><%%= currentDestination.city.name %></h2>
+          <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
+        </div>
+      </div>
+  </script>
+
 </main>
+
+
+
+
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 <script>
-  var destinationResults = <%- JSON.stringify(destinationResults) %>;
+  var destinationResults;
+  var currentDestination;
+  var destinationDetails;
+  var screenMode = "search";
+  var template = _.template($('#destination-template').html());
+
   
-  if (destinationResults) {
-    $('#search').hide();
+
+  function render() {
+    if (screenMode === "search") {
+      return;
+    } else if (screenMode === "destinationView") {
+      $('#search').hide();
+      $('#destination-display').html(template({currentDestination})).show();
+      $('.parallax').parallax();
+    } else if (screenMode === "editSearch") {
+      $('#search').show();
+      $('#destination-display').hide();
+    }
+  }
+  
+  function submitInspirationSearch() { 
+    if ( !$('#departure-city').val() ) return;
+    
+    fetch('/inspiration/search', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ origin: $('#departure-city').val(), destination: $('#destination').val() })
+    })
+    .then(res => res.json())
+    .then(data => {
+      destinationResults = data.results;
+      currentDestination = destinationResults[0];
+      screenMode = "destinationView";
+      render();
+    });
   }
 
-  // event listeners
+  function getNewDestination(destination) {
+    var newDestinationIndex = getRandomInt(0, destinationResults.length - 1);
+    currentDestination = destinationResults[newDestinationIndex];
+    console.log(currentDestination)
+    fetch('/inspiration/new', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ newDestination: currentDestination })
+    })
+    .then(res => res.json())
+    .then(data => {
+      currentDestination = destinationResults[newDestinationIndex] = data;
+      screenMode = "destinationView";
+      render();
+    });
+  }
 
-  $('#edit-search').on('click', (evt) => {
-    $('#search').show();
-    $('#results').hide();
-  });
-  function requestWeatherData() { 
-    //new AJAX request 
-    var xhr = new XMLHttpRequest(); 
-    //the Node.js server is running on a localhost, listening to port 3000 and has a function to handle requests made to /weatherdata 
-    xhr.open('POST', 'http://localhost:3000/weatherdata', true); 
-    xhr.setRequestHeader('Content-Type', 'application/json'); 
-    xhr.onload = function () { 
-      console.log(this.responseText); 
-    }; 
-    xhr.send(); 
-  };
+  function editSearch() {
+    screenMode = "editSearch";
+    render();
+  }
+  // $(document).ready(function(){
+  //     $('.parallax').parallax();
+  //   });
 
-    function weatherAPIRequest (req, res) { 
-      //dummy coordinates 
-      var longLat = '43.6532,79.3832'; 
-      //here you store api key without it being exposed to the public 
-      var weatherApiURL = 'https://api.darksky.net/forecast/YOUR API KEY/' + longLat; 
-      //request module to handle routing of API request 
-      request(weatherApiURL, function (error, response, body) { 
-        if (error) { res.writeHead(500, 'Weather API request failed', {'content-type': 'text/plain'}); 
-        res.end(); 
-        return; 
-      } 
-      //the API request that the server made is now stored in the DarkSkyAPIData variable 
-      var DarkSkyAPIData = JSON.parse(body); 
-      //the server responds to the initial AJAX request the weather data 
-      res.send(DarkSkyAPIData); 
-    }); 
-  };
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 </script>
 
 
