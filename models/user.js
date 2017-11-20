@@ -7,6 +7,7 @@ var userSchema = new Schema({
   avatar: {type: String, defualt: "https://i.imgur.com/4H32qle.jpg", required: true},
   trips: [{type: Schema.Types.ObjectId, ref: 'Trip'}],
   googleId: String,
+  googleToken: String,
   },
   {
     timestamps: true

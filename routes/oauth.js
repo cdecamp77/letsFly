@@ -5,7 +5,7 @@ var passport = require('passport');
 
 router.get('/auth/google', passport.authenticate(
   'google', 
-  { scope: ['profile', 'email']}
+  { scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar']}
 ));
 
 router.get('/oauth2callback', passport.authenticate(

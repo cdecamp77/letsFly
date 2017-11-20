@@ -9,17 +9,22 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK
   },
   function(accessToken, refreshToken, profile, cb) {
+    console.log(accessToken);
     User.findOne({ 'googleId': profile.id }, function(err, user) {
       if (err) return cb(err);
       if (user) {
-        return cb(null, user);
+        user.googleToken = accessToken;
+        user.save(function(){
+          return cb(null, user);
+        });
       } else {
         // we have a new user via OAuth!
         var newUser = new User({
           name: profile.displayName,
           email: profile.emails[0].value,
           avatar: profile.photos[0].value,
-          googleId: profile.id
+          googleId: profile.id,
+          googleToken: accessToken
         });
         newUser.save(function(err) {
           if (err) return cb(err);
