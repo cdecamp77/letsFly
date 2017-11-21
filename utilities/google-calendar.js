@@ -1,14 +1,14 @@
-var request = require('request-promise-native');
+// var request = require('request-promise-native');
 
-function listEvents(token) {
-    var options = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-        uri: 'https://www.googleapis.com/calendar/v3/calendars/primary/events'
-     };
-    return request(options);
-}
+// function listEvents(token) {
+//     var options = {
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         },
+//         uri: 'https://www.googleapis.com/calendar/v3/calendars/primary/events'
+//      };
+//     return request(options);
+// }
 
 
 // function addEvent(token, summary, start, end){
@@ -34,10 +34,10 @@ function listEvents(token) {
 // }
 
 
-module.exports = {
-    listEvents , 
+// module.exports = {
+    // listEvents , 
     // addEvent,
-};
+// };
 
 
 // var options = {
