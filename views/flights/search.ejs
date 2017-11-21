@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="row">
-                <input id="flightSearch" class="btn waves-effect waves-light" type="button" onclick="submitFlightSearch()" value="Search">
+                <button id="flight-search" type="button" class="btn waves-effect waves-light col s4" onclick="submitFlightSearch()">Search</button>
             </div>
         </form>
     </div>
@@ -51,78 +51,131 @@
 
 <div class="divider"></div>
 
-<div style="display:none" class="container" id="results">
-    <div class="row">
-        <div class="col s12">
-            <section id="flights-display">
+<section style="display:none" class="container" id="results">
+    <section id="flights-display">
                 
-            </section>
-        </div>
-    </div>
+    </section>
+        
     <div class="row">
         <div class="col s12">
             <button id="flightEdit" class="btn waves-effect waves-light" type="submit" name="action" style="display:none">Edit</button>
         </div>
     </div>
-</div>
+</section>
 
 <!-- need to make a _ template -->
 <script type="text/template" id="flights-template">
 <!-- iterate over flights array, iteneraries -->
-<h1>Flights</h1>
-<ul class="collection with-header">
-    <li class="collection-header"><h4>Itineraries</h4></li>
-        <%% flightSearchResults.results.forEach(result => { %>
-            <%% result.itineraries.forEach(itinerary => { %>
-            <li class="collection-item">
-                <div>
-                    <table class="highlight responsive-table centered teal lighten-2">
-                            <thead class="white-text">
-                                <tr>
-                                    <th>Flight</th>
-                                    <th>Origin</th>
-                                    <th>Departs At</th>
-                                    <th>Destination</th>
-                                    <th>Arrives At</th>
-                                    <th>Airline</th>
-                                </tr>
-                            </thead>
-                            <tbody class="white-text">
-                                <tr>
-                                    <td>Outbound</td>
-                                </tr>
-                                <%% itinerary.outbound.flights.forEach(flight => { %>
-                                <tr>
-                                    <td><%%= flight.flight_number %></td>
-                                    <td><%%= flight.origin.airport %></td>
-                                    <td><%%= flight.departs_at %></td>
-                                    <td><%%= flight.destination.airport %></td>
-                                    <td><%%= flight.arrives_at %></td>
-                                    <td><%%= flight.marketing_airline %></td>
-                                </tr>
-                                <%% }) %>
-                                <tr>
-                                    <td>Inbound</td>
-                                </tr>
-                                <%% itinerary.inbound.flights.forEach(flight => { %>
-                                    <tr>
-                                        <td><%%= flight.flight_number %></td>
-                                        <td><%%= flight.origin.airport %></td>
-                                        <td><%%= flight.departs_at %></td>
-                                        <td><%%= flight.destination.airport %></td>
-                                        <td><%%= flight.arrives_at %></td>
-                                        <td><%%= flight.marketing_airline %></td>
-                                    </tr>
-                                <%% }) %>
-                            </tbody>
-                        </table>
-                    <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
-                    <p><%%= result.fare.total_price %></p>
+<div class="row">
+    <h1>Flights</h1>
+    <div class="divider"></div>
+    <h4>Itineraries</h4>
+</div>
+<%% flightSearchResults.results.forEach(result => { %>
+    <%% result.itineraries.forEach(itinerary => { %>
+        <div class ="row">
+            <div id="flight-card" class="card cyan darken-3 col s12 m5">
+                <div class="card-header cyan darken-3">
+                    <div class="card-title">
+                        <h4 class="white-text flight-card-title" style="margin-left: 30px">Outbound</h4>
+                    </div>
                 </div>
-            </li>
-        <%% }) %>
+                <div class="card-content-bg white-text">
+                    <div class="card-content cyan darken-2">
+                        <%% itinerary.outbound.flights.forEach(flight => { %>
+                            <div class="row">
+                                <div class="col s4 center-align">
+                                    <div class="flight-state">
+                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.origin.airport %></h4>
+                                        <p class="white-text"><%%= flight.flight_number %></p>
+                                    </div>
+                                </div>
+                                <div class="col s4 center-align">
+                                        <i class="medium material-icons white-text" style="transform: rotate(90deg)">flight</i>
+                                </div>
+                                <div class="col s4 center-align">
+                                    <div class="flight-state">
+                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.destination.airport %></h4>
+                                    </div>
+                                </div>    
+                            </div>
+                            <div class="row">
+                                <div class="col s4 center-align">
+                                    <div class="flight-info">
+                                        <p class="white-text">Departs: <%%= flight.departs_at %></p>
+                                        <p class="white-text">Airline: <%%= flight.marketing_airline %></p>
+                                        <p class="white-text">Terminal: <%%= flight.origin.terminal %></p>
+                                    </div>
+                                </div>
+                                <div class="col s4 center-align">
+                                        <i class="medium material-icons white-text"></i>
+                                </div>
+                                <div class="col s4 center-align flight-state-two">
+                                    <div class="flight-info">
+                                        <p class="white-text">Arrives: <%%= flight.arrives_at %></p>
+                                        <p class="white-text">Terminal: <%%= flight.destination.terminal %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <%% }) %>                            
+                    </div>
+                </div>
+            </div>
+            <div id="flight-card" class="card amber darken-3 col s12 m5">
+                <div class="card-header amber darken-3">
+                    <div class="card-title">
+                        <h4 class="white-text flight-card-title" style="margin-left: 30px">Inbound</h4>
+                    </div>
+                </div>
+                <div class="card-content-bg white-text">
+                    <div class="card-content cyan darken-2">
+                        <%% itinerary.inbound.flights.forEach(flight => { %>
+                            <div class="row">
+                                <div class="col s4 center-align">
+                                    <div class="flight-state">
+                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.origin.airport %></h4>
+                                        <p class="white-text"><%%= flight.flight_number %></p>
+                                    </div>
+                                </div>
+                                <div class="col s4 center-align">
+                                        <i class="medium material-icons white-text" style="transform: rotate(90deg)">flight</i>
+                                </div>
+                                <div class="col s4 center-align">
+                                    <div class="flight-state">
+                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.destination.airport %></h4>
+                                    </div>
+                                </div>    
+                            </div>
+                            <div class="row">
+                                <div class="col s4 center-align">
+                                    <div class="flight-info">
+                                        <p class="white-text">Departs: <%%= flight.departs_at %></p>
+                                        <p class="white-text">Airline: <%%= flight.marketing_airline %></p>
+                                        <p class="white-text">Terminal: <%%= flight.origin.terminal %></p>
+                                    </div>
+                                </div>
+                                <div class="col s4 center-align">
+                                        <i class="medium material-icons white-text"></i>
+                                </div>
+                                <div class="col s4 center-align flight-state-two">
+                                    <div class="flight-info">
+                                        <p class="white-text">Arrives: <%%= flight.arrives_at %></p>
+                                        <p class="white-text">Terminal: <%%= flight.destination.terminal %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <%% }) %>                            
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m2">
+                <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                <p>$<%%= result.fare.total_price %></p>
+            </div>
+        </div>
     <%% }) %>
-</ul>
+<%% }) %>
+
     
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
@@ -132,12 +185,17 @@
     var screenMode = "search";
     var template = _.template($('#flights-template').html());
 
+    var preloader = `<div class="progress">
+            <div class="indeterminate"></div>
+        </div> `;
+
     function render() {
         if (screenMode === "search") {
       return;
         } else if (screenMode === "flightsView") {
             $('#flights-display').html(template({flightSearchResults}));
             $('#flightForm').hide();
+            $('#flight-search').html('Search');
             $('#results').show();
             $("#flightEdit").show();
         } else if (screenMode === "editSearch") {
@@ -149,7 +207,9 @@
 
     function submitFlightSearch() { 
     // if ( !$('#departure-city').val() || !$('#arrival-city').val() || !$('#departure-date').val() || !$('#return-date').val() || !$('#adults').val() ) return;
-        console.log("Working");
+        console.log('insubmitflightsearch')
+        $('#flight-search').html(preloader);
+        console.log('about to fetch');
         fetch('/flights/search', {
         method: 'POST',
         credentials: 'include',
@@ -160,7 +220,7 @@
         .then(data => {
             flightSearchResults = data;
             screenMode = "flightsView";
-            console.log(flightSearchResults);
+            console.log(flightSearchResults)
             render();
         });
     }
