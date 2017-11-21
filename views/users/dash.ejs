@@ -1,7 +1,6 @@
 <%- include ../header.ejs %>
 
 <h1 class="deep-orange-text text-lighten-1 center"><%= user.name %>'s Dashboard</h1>
-
 <div class="container">
     <div id="profile-page" class="section">
         <div id="profile-page-header" class="card">
@@ -35,8 +34,8 @@
     <div id="flight-card" class="card">
         <div class="card-header amber darker-2">
             <div class="card-title">
-                <h4 class="flight-card-title">Your Next Flight</h4>
-                <p class="flight-card-date">June 18, Thu</p>
+                <h4 class="flight-card-title">Upcoming Flights</h4>
+                <p class="flight-card-date">Thur June 18, 2018</p>
             </div>
         </div>
         <div class="card-content-bg white-text">
@@ -78,7 +77,8 @@
         </div>
     </div>
 </div>
-
+<h4 class="flight-card-title">Past Flights</h4>
+<div class="divider"></div>
 <div class="container">
 <div class="card">
         <div class="card-content">
@@ -98,3 +98,5 @@
         </div>
       </div>
     </div>
+
+<%- include ../footer.ejs %>
