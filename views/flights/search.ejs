@@ -54,7 +54,9 @@
 <div style="display:none" class="container" id="results">
     <div class="row">
         <div class="col s12">
-            <div id="flights-display"></div>
+            <section id="flights-display">
+                
+            </section>
         </div>
     </div>
     <div class="row">
@@ -67,6 +69,61 @@
 <!-- need to make a _ template -->
 <script type="text/template" id="flights-template">
 <!-- iterate over flights array, iteneraries -->
+<h1>Flights</h1>
+<ul class="collection with-header">
+    <li class="collection-header"><h4>Itineraries</h4></li>
+        <%% flightSearchResults.results.forEach(result => { %>
+            <%% result.itineraries.forEach(itinerary => { %>
+            <li class="collection-item">
+                <div>
+                    <table class="highlight responsive-table centered teal lighten-2">
+                            <thead class="white-text">
+                                <tr>
+                                    <th>Flight</th>
+                                    <th>Origin</th>
+                                    <th>Departs At</th>
+                                    <th>Destination</th>
+                                    <th>Arrives At</th>
+                                    <th>Airline</th>
+                                </tr>
+                            </thead>
+                            <tbody class="white-text">
+                                <tr>
+                                    <td>Outbound</td>
+                                </tr>
+                                <%% itinerary.outbound.flights.forEach(flight => { %>
+                                <tr>
+                                    <td><%%= flight.flight_number %></td>
+                                    <td><%%= flight.origin.airport %></td>
+                                    <td><%%= flight.departs_at %></td>
+                                    <td><%%= flight.destination.airport %></td>
+                                    <td><%%= flight.arrives_at %></td>
+                                    <td><%%= flight.marketing_airline %></td>
+                                </tr>
+                                <%% }) %>
+                                <tr>
+                                    <td>Inbound</td>
+                                </tr>
+                                <%% itinerary.inbound.flights.forEach(flight => { %>
+                                    <tr>
+                                        <td><%%= flight.flight_number %></td>
+                                        <td><%%= flight.origin.airport %></td>
+                                        <td><%%= flight.departs_at %></td>
+                                        <td><%%= flight.destination.airport %></td>
+                                        <td><%%= flight.arrives_at %></td>
+                                        <td><%%= flight.marketing_airline %></td>
+                                    </tr>
+                                <%% }) %>
+                            </tbody>
+                        </table>
+                    <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                    <p><%%= result.fare.total_price %></p>
+                </div>
+            </li>
+        <%% }) %>
+    <%% }) %>
+</ul>
+    
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 <script>
