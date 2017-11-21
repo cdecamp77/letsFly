@@ -6,13 +6,13 @@
         <form class="col s12">
             <div class="row city">
                 <div class="input-field col s12">
-                    <input placeholder="" id="departure-city" type="text" class="autocomplete_dep validate">
+                    <input placeholder="" id="departure-city" type="text" class="autocomplete validate">
                     <label class="active" for="departure-city">Departure City</label>
                 </div>
             </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="destination" type="text" class="autocomplete_d validate">
+                        <input id="destination" type="text" class="autocomplete validate">
                         <label for="destination">Destination</label>
                     </div>
                 </div>
@@ -49,48 +49,75 @@
 
 <!-- search results -->
 
-    <div class="divider"></div>
-</div>
+<div class="divider"></div>
 
-<div class="container">
+<div style="display:none" class="container" id="results">
     <div class="row">
         <div class="col s12">
-            <div id="results" style="display:none">Search results populate here</div>
+            <div id="flights-display"></div>
         </div>
-            <div class="row">
-                <div class="col s12">
-                    <button id="flightEdit" class="btn waves-effect waves-light" type="submit" name="action" style="display:none">Edit</button>
-                </div>
-            </div>
-    </div>   
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button id="flightEdit" class="btn waves-effect waves-light" type="submit" name="action" style="display:none">Edit</button>
+        </div>
+    </div>
 </div>
 
 <!-- need to make a _ template -->
-
-<script src="/javascripts/autofill.js"></script>
-<script src="/javascripts/datepicker.js"></script>
-<script src="/javascripts/showFlightResults.js"></script>
-
+<script type="text/template" id="flights-template">
+<!-- iterate over flights array, iteneraries -->
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 <script>
+
     var flightSearchResults;
+    var screenMode = "search";
+    var template = _.template($('#flights-template').html());
 
-      function submitFlightSearch() { 
+    function render() {
+        if (screenMode === "search") {
+      return;
+        } else if (screenMode === "flightsView") {
+            $('#flights-display').html(template({flightSearchResults}));
+            $('#flightForm').hide();
+            $('#results').show();
+            $("#flightEdit").show();
+        } else if (screenMode === "editSearch") {
+            $('#flightForm').show();
+            $('#results').hide();
+            $("#flightEdit").hide();
+        }
+    }
+
+    function submitFlightSearch() { 
     // if ( !$('#departure-city').val() || !$('#arrival-city').val() || !$('#departure-date').val() || !$('#return-date').val() || !$('#adults').val() ) return;
-    console.log("WOrking");
-    fetch('/flights/search', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ origin: $('#departure-city').val(), destination: $('#destination').val(), departureDate: $('#departure-date').val(), returnDate: $('#return-date').val(), adults: $('#adults').val() })
-    })
-    .then(res => res.json())
-    .then(data => {
-        flightSearchResults = data;
-        console.log(flightSearchResults);
+        console.log("Working");
+        fetch('/flights/search', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ origin: $('#departure-city').val().slice(-4, -1), destination: $('#destination').val().slice(-4, -1), departureDate: $('#departure-date').val(), returnDate: $('#return-date').val(), adults: $('#adults').val() })
+        })
+        .then(res => res.json())
+        .then(data => {
+            flightSearchResults = data;
+            screenMode = "flightsView";
+            console.log(flightSearchResults);
+            render();
+        });
+    }
+
+
+    $(document).ready(function() {
+        $("#flightEdit").on('click', function(e) {
+            screenMode = "editSearch";
+            render();
+        });
     });
-  }
-
-
 </script>
 
-  <%- include ../footer.ejs %>  
+<script src="/javascripts/autofill.js"></script> 
+<script src="/javascripts/datepicker.js"></script>
+
+<%- include ../footer.ejs %>  
