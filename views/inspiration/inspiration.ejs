@@ -1,5 +1,5 @@
 <%- include ../header.ejs %>
-
+<main></main>
   <section id="search">
     <div class="container">
       <div class="row">
@@ -35,13 +35,14 @@
       <div class="section white">
         <div class="row container">
           <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
-          <button id="new-destination" onclick="getNewDestination()" class="btn">Edit Search!</button>
+          <button id="new-destination" onclick="showNewDestination()" class="btn" style="display:none">New Destination!</button>
           <h2 class="header"><%%= currentDestination.city.name %></h2>
           <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
         </div>
       </div>
   </script>
 
+</main>
 
 
 
@@ -51,6 +52,9 @@
 <script>
   var destinationResults;
   var currentDestination;
+  var currentDestinationIndex;
+  var nextDestination;
+  var nextDetinationIndex;
   var destinationDetails;
   var screenMode = "search";
   var template = _.template($('#destination-template').html());
@@ -64,6 +68,7 @@
       $('#search').hide();
       $('#destination-display').html(template({currentDestination})).show();
       $('.parallax').parallax();
+      preloadNextDestination();
     } else if (screenMode === "editSearch") {
       $('#search').show();
       $('#destination-display').hide();
@@ -82,42 +87,46 @@
     .then(res => res.json())
     .then(data => {
       destinationResults = data.results;
-      currentDestination = destinationResults[0];
+      currentDestinationIndex = 0;
+      currentDestination = destinationResults[currentDestinationIndex];
       screenMode = "destinationView";
       render();
     });
   }
 
-  function getNewDestination(destination) {
-    var newDestinationIndex = getRandomInt(0, destinationResults.length - 1);
-    currentDestination = destinationResults[newDestinationIndex];
-    console.log(currentDestination)
+  function preloadNextDestination() {
+    if (currentDestinationIndex === destinationResults.length - 1) {
+      nextDetinationIndex = 0;
+    } else {
+      nextDetinationIndex = currentDestinationIndex + 1;
+    }
+    nextDestination = destinationResults[nextDetinationIndex];
     fetch('/inspiration/new', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ newDestination: currentDestination })
+      body: JSON.stringify({nextDestination})
     })
     .then(res => res.json())
     .then(data => {
-      currentDestination = destinationResults[newDestinationIndex] = data;
-      console.log(currentDestination);
-      screenMode = "destinationView";
-      render();
+      nextDestination = destinationResults[nextDetinationIndex] = data;
+      $('#new-destination').show();
     });
+  }
+
+  function showNewDestination() {
+    currentDestinationIndex = nextDetinationIndex
+    currentDestination = nextDestination;
+    console.log('in show new destination');
+    screenMode = "destinationView";
+    render();
   }
 
   function editSearch() {
     screenMode = "editSearch";
     render();
   }
-  // $(document).ready(function(){
-  //     $('.parallax').parallax();
-  //   });
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 </script>
 
 
