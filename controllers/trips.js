@@ -56,8 +56,8 @@ function getInspirationData (req, res) {
 
 function updateInspirationData (req, res) {
     var body= req.body;
-    var updatedDestination = body.newDestination;
-    request(`http://api.sandbox.amadeus.com/v1.2/location/${body.newDestination.destination}/?apikey=${process.env.AMADEUS_TOKEN}`, (err, response, body) => {
+    var updatedDestination = body.nextDestination;
+    request(`http://api.sandbox.amadeus.com/v1.2/location/${body.nextDestination.destination}/?apikey=${process.env.AMADEUS_TOKEN}`, (err, response, body) => {
         updatedDestination.city = JSON.parse(body).city;
         console.log(updatedDestination);
         request(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(updatedDestination.city.name)}`, (err, response, body) => {
