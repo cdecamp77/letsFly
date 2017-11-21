@@ -71,13 +71,25 @@ nav, footer{
   margin: 0.5rem 0 1rem 0;
     margin-top: 0.5rem;
     margin-right: 0px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
     margin-left;
   background-color: #fff;
   border-radius: 2px;
 }
-.flight-state {
-  padding-bottom: 15px;
+.flight-card-title {
+  font-weight: 300;
+}
+h1 {
+  letter-spacing: -2px;
+}
+.footer-copyright {
+  overflow: hidden;
+  height: 50px;
+  line-height: 50px;
+}
+table.highlight tbody tr:hover {
+  background-color: #b2dfdb !important;
+  color: #00695c !important;
 }
 input.qtyplus { width:25px; height:25px;}
 input.qtyminus { width:25px; height:25px;}

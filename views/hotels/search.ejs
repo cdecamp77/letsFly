@@ -1,6 +1,6 @@
 <%- include ../header.ejs %>
 
-<h1 class="deep-orange-text text-lighten-1 center"> Hotel Search</h1>
+<h1 class="deep-orange-text text-lighten-1 center flight-card-title"> Hotel Search</h1>
 <div class="container" id="hotelForm">
     <div class="row">
         <!-- <p id="cityResult"></p> -->
@@ -50,12 +50,19 @@
 </div> 
 
 <!-- hotel search results -->
-<div class="divider"></div>
-</div>
-<div id="results" style="display:none">Search results populate here
-    <br>
-<button id="hotelEdit" class="btn waves-effect waves-light btn-large" type="submit" name="action">Edit Hotels
-    </button>
+<div id="results" style="display:none">
+    <div class="parallax-container">
+            <div class="parallax"><img src="https://static1.squarespace.com/static/534ad50ae4b04a5110f5ae72/55364bdbe4b0b943e0b77258/55364bfae4b0a3636328deb5/1429621756419/21IMG_4136-Modifier-Modifier-4.jpg"></div>
+        </div>
+    <div class="container" style="margin-bottom: 30px">
+            <div id="flight-card" class="card teal lighten-1">
+                <div class="card-header teal lighten-1">
+                        <div class="card-title">
+                            <h4 class="white-text flight-card-title" style="margin-left: 30px">Hotels Near You</h4>
+                        </div>
+                    </div>
+        <button id="hotelEdit" class="btn waves-effect waves-light btn-large amber" type="submit" name="action">Edit Search
+            </button>
 </div>
 
 <!-- geolocator test -->
@@ -129,6 +136,7 @@ function errorFunction(){
 <script>
     $(document).ready(function() {
     $('select').material_select();
+    $('.parallax').parallax();
   });
 </script>
 <%- include ../footer.ejs %>
