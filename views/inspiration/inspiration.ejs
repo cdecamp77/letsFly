@@ -1,5 +1,5 @@
 <%- include ../header.ejs %>
-<main>
+
   <section id="search">
     <div class="container">
       <div class="row">
@@ -42,7 +42,6 @@
       </div>
   </script>
 
-</main>
 
 
 
@@ -102,6 +101,7 @@
     .then(res => res.json())
     .then(data => {
       currentDestination = destinationResults[newDestinationIndex] = data;
+      console.log(currentDestination);
       screenMode = "destinationView";
       render();
     });
