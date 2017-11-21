@@ -12,7 +12,21 @@ function root (req, res) {
 }
 
 function flightSearch (req, res) {
-    res.render('./flights/search', { user: req.user });
+    var activeTrip;
+    Trip.findOne({active: true}, (err, trip) => {
+        if (err) {}
+        if (!trip) {
+            var newTrip = new Trip();
+            if (newTrip.save()) {
+                req.user.trips.push(newTrip);
+                req.user.save();
+                activeTrip = newTrip;
+            }
+        } else {
+            activeTrip = trip;
+        }
+        res.render('./flights/search', { user: req.user, activeTrip});
+    });
 }
 
 function hotelSearch (req, res) {

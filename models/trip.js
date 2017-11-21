@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var tripSchema = new Schema ({
   departureCity: {type: String},
   arrivalCity: {type:String},
-  travelers: {type: String, default: "1"},
+  adults: {type: String},
   active: {type: Boolean, default: true},
-  booked: {type: Boolean, defualt: false},
+  booked: {type: Boolean, default: false},
   flights: [{type: Schema.Types.ObjectId, ref: 'Flight'}],
   hotels: [{type: Schema.Types.ObjectId, ref: 'Hotel'}]
   },
