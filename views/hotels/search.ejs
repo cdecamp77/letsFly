@@ -39,12 +39,14 @@
                 <label>Guests</label>
             </div>
         </div>
-        <div class="row">
+         <div class="row">
             <div class="input-field col s6">
                 <button id="hotelSearch" class="btn waves-effect waves-light btn-large" type="submit" name="action">Search
                 </button>
-            </div>
+            </div> 
         </div>
+        <!-- hotel search button, not working -->
+        <input id="hotelsSearch" class="btn waves-effect waves-light" type="button" onclick="submitHotelSearch()" value="Search">
         </form>
     </div>
 </div> 
@@ -69,6 +71,7 @@
  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
 <script type="text/javascript"> 
   var geocoder;
+  var hotelSearchResults;
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
@@ -124,6 +127,27 @@ function errorFunction(){
       }
     });
   }
+
+// Start of hotel search
+
+      function submitHotelSearch() { 
+    // if ( !$('#departure-city').val() || !$('#arrival-city').val() || !$('#departure-date').val() || !$('#return-date').val() || !$('#adults').val() ) return;
+        console.log("Working");
+        fetch('/hotels/search', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ location: $('#cityResult').val(), check_in: $('#checkin_date').val(), check_out: $('#checkout_date').val() })
+        })
+        .then(res => res.json())
+        .then(data => {
+            hotelSearchResults = data;
+            screenMode = "flightsView";
+            console.log(hotelSearchResults);
+            // render();
+        });
+    }
+
 </script> 
 </head> 
 <body onload="initialize()">  
