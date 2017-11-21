@@ -4,6 +4,7 @@ var tripsCtrl = require('../controllers/trips');
 
 router.get('/', tripsCtrl.root);
 router.get('/flights/search', tripsCtrl.flightSearch);
+router.post('/flights/search', tripsCtrl.getFlightData);
 router.get('/hotels/search', tripsCtrl.hotelSearch);
 router.get('/trips', tripsCtrl.index);
 router.get('/inspirations', tripsCtrl.insp);

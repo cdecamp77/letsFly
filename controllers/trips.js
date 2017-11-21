@@ -67,6 +67,14 @@ function updateInspirationData (req, res) {
     });
 }
 
+function getFlightData (req, res) {
+    var body = req.body;
+    request(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.origin}&destination=${body.destination}&departure_date=${body.departureDate}&return_date=${body.returnDate}&adults=${body.adults}`, (err, response, flights) => {
+        var searchResults = JSON.parse(flights);
+        res.json(searchResults).status(200);
+    });
+}
+
 module.exports = {
     root, 
     flightSearch,
@@ -74,5 +82,6 @@ module.exports = {
     index,
     insp,
     getInspirationData,
-    updateInspirationData
+    updateInspirationData,
+    getFlightData
 }
