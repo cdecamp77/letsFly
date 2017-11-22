@@ -3,8 +3,6 @@ var Hotel = require('../models/hotel');
 var Flight = require('../models/flight');
 var request = require('request');
 var calendar = require('../utilities/google-calendar');
-var airports = require('airport-codes');
-var cityCoords = require('city-to-coords'); 
 
 
 function root (req, res) {
