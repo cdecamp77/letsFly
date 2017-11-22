@@ -25,8 +25,13 @@ function flightSearch (req, res) {
         } else {
             activeTrip = trip;
         }
-        res.render('./flights/search', { user: req.user, activeTrip});
     });
+    if (req.query.inspiration) {
+        var body = req.body;
+        res.render('./flights/search', { user: req.user, activeTrip, origin: body.origin, destination: body.currentDestination});
+    } else {
+        res.render('./flights/search', { user: req.user, activeTrip, origin: null, destination: null });
+    }
 }
 
 function hotelSearch (req, res) {
@@ -48,6 +53,21 @@ function index (req, res) {
         // });
         res.render('./users/dash', { trips, user: req.user });
     });
+}
+
+function createFlights(req, res) {
+    var itinerary = req.body.itinerary;
+    var price = req.body.price
+    itinerary.outbound.flights.forEach(flight => {
+        var newFlight = new Flight({outbound: true, origin: flight.origin.airport, destination: flight.destination.airport, departureTime: Date.parse(flight.departs_at), arrivalTime: Date.parse(flight.arrives_at), marketingAirline: flight.marketing_airline, operatingAirline: flight.operating_airline, flightNumber: flight.flight_number});
+        newFlight.save();
+        User.findById(req.user._id).populate('trips').find({'trips.active': true}).exec((err, user) => {
+            user.trips.find({active: true}, (err, trip) => {
+                trip.flightsCost = price;
+                trip.flights.push()
+    });
+        })
+    })
 }
 
 function insp (req, res) {

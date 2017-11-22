@@ -10,10 +10,6 @@ var flightSchema = new Schema ({
   marketingAirline: String,
   operatingAirline: String,
   flightNumber: String,
-  travelClass: String,
-  totalPrice: Number,
-  changePenalties: Boolean,
-  refundable: Boolean
   },
   {
     timestamps: true

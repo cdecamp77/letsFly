@@ -11,7 +11,8 @@ router.post('/hotels/search', isLoggedIn, tripsCtrl.getHotelData);
 
 router.get('/trips', isLoggedIn, tripsCtrl.index);
 router.get('/inspirations', isLoggedIn, tripsCtrl.insp);
-router.get('/users/dash', isLoggedIn, tripsCtrl.index)
+router.get('/users/dash', isLoggedIn, tripsCtrl.index);
+router.post('/users/dash', isLoggedIn, tripsCtrl.createFlights);
 router.post('/inspiration/search', isLoggedIn, tripsCtrl.getInspirationData);
 router.post('/inspiration/new', isLoggedIn, tripsCtrl.updateInspirationData);
 
