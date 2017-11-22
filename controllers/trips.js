@@ -20,7 +20,7 @@ function hotelSearch (req, res) {
 }
 
 function index (req, res) {
-    Trip.find({}).populate('Flight').populate('Hotel').exec((err, trips) => {
+    Trip.find({}).exec((err, trips) => {
         // calendar.addEvent(req.user.googleToken, 'destination', new Date().toISOString(), new Date().toISOString())
         // .then(function(events) {
         //     console.log(events);
@@ -113,12 +113,18 @@ function getHotelData (req, res) {
 }
 
 function bookFlights(req, res) {
-    for key in req.body
-    Trip.findById(req.param.id, (err, trip) => {
-        trip.flights
+    var body = req.body;
+    Trip.findById(req.params.id, (err, trip) => {
+        for (flight in body) {
+            var newFlight = {outbound: body[flight].outbound, origin: body[flight].origin, destination: body[flight].destination, departureTime: Date.parse(body[flight].departureTime), arrivalTime: Date.parse(body[flight].arrivalTime), airline: body[flight].airline, flightNumber: body[flight].flightNumber};
+            trip.flights.push(newFlight);
+        }
+        trip.save( err => {
+            // if (err) return res.render('./flights/search', {user: req.user});
+            console.log(trip);
+            res.redirect('/trips');
+        })
     })
-    console.log(req.body);
-    res.end('Hello World');
 }
 
 module.exports = {
