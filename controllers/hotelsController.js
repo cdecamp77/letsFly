@@ -1,7 +1,8 @@
 var Hotel = require('../models/hotel');
+var hotelCtrl = require('../controllers/hotelsController');
 
 function hotelSearch (req, res) {
-    res.render('./hotels/search', { user: req.user });
+    res.render('./trips/:id/hotels/results', { user: req.user });
 }
 
 function getHotelData (req, res) {
@@ -18,3 +19,16 @@ module.exports = {
     hotelSearch,
     getHotelData
 }
+
+
+        // calendar.addEvent(req.user.googleToken, 'destination', new Date().toISOString(), new Date().toISOString())
+        // .then(function(events) {
+        //     console.log(events);
+        // });
+        // calendar.listEvents(req.user.googleToken)
+        // .then(function(response) {
+        //     console.log(response);
+        // })
+        // .catch(function(err) {
+        //     console.log(err);
+        // });

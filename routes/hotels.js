@@ -1,9 +1,11 @@
 var express= require('express');
 var router = express.Router();
-var hotelCtrl = require('../controllers/hotelController');
+var hotelsCtrl = require('../controllers/hotelsController');
 
-router.get('/hotels/search', isLoggedIn, hotelCtrl.hotelSearch);
-router.post('/hotels/search', isLoggedIn, hotelCtrl.getHotelData);
+router.get('/trips/:id/hotels/results', isLoggedIn, hotelsCtrl.hotelSearch);
+router.post('/trips/:id/hotels', isLoggedIn, hotelsCtrl.getHotelData);
+
+// edit hotels
 
 module.exports = router;
 

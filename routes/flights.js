@@ -1,9 +1,10 @@
-var express= require('express');
+var express = require('express');
 var router = express.Router();
-var flightCtrl = require('../controllers/flightController');
+var flightsCtrl = require('../controllers/flightsController');
 
-router.get('/flights/search', isLoggedIn, flightCtrl.flightSearch);
-router.post('/flights/search', isLoggedIn, flightCtrl.getFlightData);
+
+router.post('/trips/:id/flights/results', isLoggedIn, flightsCtrl.getFlightData);
+
 
 module.exports = router;
 
