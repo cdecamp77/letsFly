@@ -2,21 +2,26 @@
 
 <h1 class="deep-orange-text text-lighten-1 center flight-card-title"><%= user.name %>'s Dashboard</h1>
 <div class="container" style="margin-bottom: 50px">
-    <%= user.trips[0] %>
+
+    <% user.trips.forEach(trip => { %>
+        <% if (trip.flights.length > 0) { %>
+            <% if (trip.flights[0].departureTime > Date.now()) { %>
+
     <div class="card cyan darken-3">
         <div class="card-header cyan darken-3">
             <div class="card-title">
                 <h4 class="white-text flight-card-title" style="margin-left: 30px">Upcoming Flights</h4>
-                <p class="white-text" style="margin-left: 30px">Thur June 18, 2018</p>
+                <p class="white-text" style="margin-left: 30px"><%= trip.departureDate.toString() %>></p>
             </div>
         </div>
         <div class="card-content-bg white-text">
+            <% trip.flights.forEach(flight => { %>
             <div class="card-content cyan darken-2">
                 <div class="row">
                     <div class="col s4 center-align">
                         <div class="flight-state">
-                            <h4 class="white-text" style="margin-bottom: 5px">LDN</h4>
-                            <p class="white-text">London</p>
+                            <h4 class="white-text" style="margin-bottom: 5px"><%= flight.origin %></h4>
+                            <p class="white-text"><%= flight.departureCity %></p>
                         </div>
                     </div>
                     <div class="col s4 center-align">
@@ -24,17 +29,17 @@
                     </div>
                     <div class="col s4 center-align">
                         <div class="flight-state">
-                            <h4 class="white-text" style="margin-bottom: 5px">LAX</h4>
-                            <p class="white-text">Los Angeles</p>
+                            <h4 class="white-text" style="margin-bottom: 5px"><%= flight.destination %>/h4>
+                            <p class="white-text"><%= flight.arrivalCity %></p>
                         </div>
                     </div>    
                 </div>
                 <div class="row">
                     <div class="col s4 center-align">
                         <div class="flight-info">
-                            <p class="white-text">Depart: 10:00pm</p>
-                            <p class="white-text">Airline: Alaska</p>
-                            <p class="white-text">Terminal: 8</p>
+                            <p class="white-text">Depart: <%= flight.departureTime %></p>
+                            <p class="white-text">Airline: <%= flight.airline %></p>
+                            <p class="white-text">Flight Number: <%= flight.flightNumber %></p>
                         </div>
                     </div>
                     <div class="col s4 center-align">
@@ -42,15 +47,19 @@
                     </div>
                     <div class="col s4 center-align flight-state-two">
                         <div class="flight-info">
-                            <p class="white-text">Arrive: 10:00pm</p>
-                            <p class="white-text">Airline: Alaska</p>
-                            <p class="white-text">Terminal: 8</p>
+                            <p class="white-text">Arrive: <%= flight.arrivalTime %></p>
+                            <p class="white-text">Airline: <%= flight.airline %></p>
+                            <p class="white-text">Flight Number: <%= flight.flightNumber %></p>
                         </div>
                     </div>
                 </div>
             </div>
+            <% }) %>
         </div>
     </div>
+            <% } %>
+        <% } %>
+    <% }) %>
 </div>
 <div class="container" style="margin-bottom: 30px">
     <div id="flight-card" class="card teal lighten-1">

@@ -27,7 +27,10 @@ router.get('/inspirations', isLoggedIn, tripsCtrl.insp);
 router.post('/inspiration/search', isLoggedIn, tripsCtrl.getInspirationData);
 router.post('/inspiration/new', isLoggedIn, tripsCtrl.updateInspirationData);
 
-
+router.get('/trips/:id/edit', isLoggedIn, tripsCtrl.edit);
+router.put('/trips/:id/edit/flights/results', isLoggedIn, tripsCtrl.editTripFlights);
+router.post('/trips/:id/edit', isLoggedIn, tripsCtrl.editBookedFlights);
+router.delete('/trips/:id', isLoggedIn, tripsCtrl.deleteTrip);
 module.exports = router;
 
 function isLoggedIn(req, res, next) {

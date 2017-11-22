@@ -1,0 +1,63 @@
+<%- include ../header.ejs %>
+
+<div class="container" id="flightForm">
+    <h1 class="deep-orange-text text-lighten-1 center flight-card-title">Flight Search</h1>
+    <div class="row">
+        <form action="/trips/<%= trip._id %>/edit/flights/results?_method=PUT" method="POST" class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="departure-city" type="text" class="autocomplete validate" name="departureCity" value="<%= trip.departureCity %>">
+                    <label for="departure-city">Departure City</label>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="destination" type="text" class="autocomplete validate" name="arrivalCity" value="<%= trip.arrivalCity %>">
+                        <label for="destination">Destination</label>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="departure-date" type="text" class="datepicker" name="departureDate" value="<%= trip.departureDate %>">
+                    <label for="departure-date">Departure Date</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="return-date" type="text" class="datepicker" name="returnDate" value="<%= trip.returnDate %>">
+                    <label for="return-date">Return Date</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <select id="adults" name="travelers" value="<%= trip.travelers %>">
+                        <option value="" disabled selected>Number of Travelers</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                    <label>Travelers</label>
+                </div>
+            </div>
+            <div class="row">
+                <button id="flight-search" type="submit" class="btn waves-effect waves-light col s4 btn-large" name="action">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var preloader = `<div class="progress">
+            <div class="indeterminate"></div>
+        </div> `;
+
+    $('#flight-search').on('click', evt => {
+        $('#flight-search').html(preloader);
+    });
+</script>
+
+<script src="/javascripts/autofill.js"></script> 
+<script src="/javascripts/datepicker.js"></script>
+
+<%- include ../footer.ejs %>  
