@@ -21,4 +21,4 @@ var hotelSchema = new Schema ({
   }
 );
 
-module.exports = mongoose.model('Hotel', hotelSchema);
+module.exports = hotelSchema;

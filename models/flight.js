@@ -16,4 +16,4 @@ var flightSchema = new Schema ({
   }
 );
 
-module.exports = mongoose.model('Flight', flightSchema);
+module.exports = flightSchema;
