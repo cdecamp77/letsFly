@@ -3,8 +3,11 @@ var router = express.Router();
 var tripsCtrl = require('../controllers/trips');
 
 router.get('/', tripsCtrl.root);
+
+// trips/new
 router.get('/flights/search', isLoggedIn, tripsCtrl.flightSearch);
 router.post('/flights/results', isLoggedIn, tripsCtrl.getFlightData);
+router.post('/trips/:id', isLoggedIn, tripsCtrl.bookFlights);
 // added post for hotels below
 router.get('/hotels/search', isLoggedIn, tripsCtrl.hotelSearch);
 router.post('/hotels/search', isLoggedIn, tripsCtrl.getHotelData);

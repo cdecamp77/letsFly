@@ -95,7 +95,7 @@ function getFlightData (req, res) {
             request(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.departureCity.slice(-4, -1)}&destination=${body.arrivalCity.slice(-4, -1)}&departure_date=${body.departureDate}&adults=${body.travelers}&number_of_results=20${retDate}`, (err, response, flights) => {
                     var searchResults = JSON.parse(flights);
                     console.log(searchResults);
-                    res.render('./flights/results', { user: req.user, flightSearchResults: searchResults, trip: newTrip});
+                    res.render('./flights/results', { user: req.user, flightSearchResults: searchResults, tripId: newTrip._id});
             });
         });
     });
@@ -112,6 +112,14 @@ function getHotelData (req, res) {
     });
 }
 
+function bookFlights(req, res) {
+    for key in req.body
+    Trip.findById(req.param.id, (err, trip) => {
+        trip.flights
+    })
+    console.log(req.body);
+    res.end('Hello World');
+}
 
 module.exports = {
     root, 
@@ -122,5 +130,6 @@ module.exports = {
     getInspirationData,
     updateInspirationData,
     getFlightData,
-    getHotelData
+    getHotelData,
+    bookFlights
 }

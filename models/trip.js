@@ -6,8 +6,11 @@ var Hotel = require('./hotel');
 var tripSchema = new Schema ({
   departureCity: {type: String},
   arrivalCity: {type:String},
+  departureDate: Date,
+  returnDate: Date,
   travelers: {type: String},
-  flightsCost: String,
+  flightCost: String,
+  hotelCost: String,
   flights: [Flight],
   hotels: [Hotel]
   },

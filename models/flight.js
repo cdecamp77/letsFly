@@ -7,8 +7,7 @@ var flightSchema = new Schema ({
   destination: {type:String, required: true},
   departureTime: Date,
   arrivalTime: Date,
-  marketingAirline: String,
-  operatingAirline: String,
+  airline: String,
   flightNumber: String,
   },
   {
