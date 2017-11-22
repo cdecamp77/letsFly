@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="input-field col s11">
                     <input id="cityResult" type="text" class="validate" placeholder="City, State">
-                    <label class="active" for="cityResult">Current Location</label>
+                    <label class="active" for="cityResult" value="">Current Location</label>
                 </div>
                 <div class="input-field col s1">
                     <button onclick="geoFindMe()" class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons">near_me</i>
@@ -55,7 +55,7 @@
 <div id="results" style="display:none">
     <div class="parallax-container">
             <div class="parallax"><img src="https://static1.squarespace.com/static/534ad50ae4b04a5110f5ae72/55364bdbe4b0b943e0b77258/55364bfae4b0a3636328deb5/1429621756419/21IMG_4136-Modifier-Modifier-4.jpg"></div>
-        </div>
+    </div>
     <div class="container" style="margin-bottom: 30px">
             <div id="flight-card" class="card teal lighten-1">
                 <div class="card-header teal lighten-1">
@@ -63,86 +63,83 @@
                             <h4 class="white-text flight-card-title" style="margin-left: 30px">Hotels Near You</h4>
                         </div>
                     </div>
-        <button id="hotelEdit" class="btn waves-effect waves-light btn-large amber" type="submit" name="action">Edit Search
-            </button>
+        <button id="hotelEdit" class="btn waves-effect waves-light btn-large amber" type="submit" name="action">Edit Search</button>
 </div>
 
 <!-- geolocator test -->
  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
 <script type="text/javascript"> 
-  var geocoder;
+//   var geocoder;
   var hotelSearchResults;
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-} 
-//Get the latitude and the longitude;
-function successFunction(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    codeLatLng(lat, lng)
-}
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+// } 
+// //Get the latitude and the longitude;
+// function successFunction(position) {
+//     var lat = position.coords.latitude;
+//     var lng = position.coords.longitude;
+//     codeLatLng(lat, lng)
+// }
 
-function errorFunction(){
-    alert("Geocoder failed");
-}
+// function errorFunction(){
+//     alert("Geocoder failed");
+// }
 
-  function initialize() {
-    geocoder = new google.maps.Geocoder();
+//   function initialize() {
+//     geocoder = new google.maps.Geocoder();
+//   }
 
+//   function codeLatLng(lat, lng) {
 
+//     var latlng = new google.maps.LatLng(lat, lng);
+//     geocoder.geocode({'latLng': latlng}, function(results, status) {
+//       if (status == google.maps.GeocoderStatus.OK) {
+//       console.log(results)
+//         if (results[3]) {
+//          //formatted address
+//          var cityResult = document.getElementById("cityResult");cityResult.value = results[3].formatted_address;
+//         // //find country name
+//         //      for (var i=0; i<results[0].address_components.length; i++) {
+//         //     for (var b=0;b<results[0].address_components[i].types.length;b++) {
 
-  }
-
-  function codeLatLng(lat, lng) {
-
-    var latlng = new google.maps.LatLng(lat, lng);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-      console.log(results)
-        if (results[3]) {
-         //formatted address
-         var cityResult = document.getElementById("cityResult");cityResult.value = results[3].formatted_address;
-        // //find country name
-        //      for (var i=0; i<results[0].address_components.length; i++) {
-        //     for (var b=0;b<results[0].address_components[i].types.length;b++) {
-
-        //     //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
-        //         if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
-        //             //this is the object you are looking for
-        //             city= results[0].address_components[i];
-        //             break;
-        //         }
-        //     }
-        // }
-        //city data
-        // alert(city.short_name + " ")
+//         //     //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+//         //         if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+//         //             //this is the object you are looking for
+//         //             city= results[0].address_components[i];
+//         //             break;
+//         //         }
+//         //     }
+//         // }
+//         //city data
+//         // alert(city.short_name + " ")
 
 
-        } else {
-          alert("No results found");
-        }
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-  }
+//         } else {
+//           alert("No results found");
+//         }
+//       } else {
+//         alert("Geocoder failed due to: " + status);
+//       }
+//     });
+//   }
 
 // Start of hotel search
 
-      function submitHotelSearch() { 
+    function submitHotelSearch() { 
     // if ( !$('#departure-city').val() || !$('#arrival-city').val() || !$('#departure-date').val() || !$('#return-date').val() || !$('#adults').val() ) return;
+        
         console.log("Working");
         fetch('/hotels/search', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ location: $('#cityResult').val(), check_in: $('#checkin_date').val(), check_out: $('#checkout_date').val() })
+        body: JSON.stringify({ location: $('#cityResult'), check_in: $('#checkin_date').val(), check_out: $('#checkout_date').val() })
         })
         .then(res => res.json())
         .then(data => {
             hotelSearchResults = data;
-            screenMode = "flightsView";
+            screenMode = "hotelsView";
             console.log(hotelSearchResults);
             // render();
         });
@@ -150,17 +147,17 @@ function errorFunction(){
 
 </script> 
 </head> 
-<body onload="initialize()">  
-
+<!-- <body onload="initialize()">   -->
+<script src="/javascripts/autofill.js"></script>
 <script src="/javascripts/datepicker.js"></script>
-<script src="/javascripts/hotelLocator.js"></script>
-<script src="/javascripts/showHotelResults.js"></script>
-
+<!-- <script src="/javascripts/hotelLocator.js"></script> -->
+<!-- <script src="/javascripts/showHotelResults.js"></script> -->
+<!-- 
 
 <script>
     $(document).ready(function() {
     $('select').material_select();
     $('.parallax').parallax();
   });
-</script>
+</script> -->
 <%- include ../footer.ejs %>
