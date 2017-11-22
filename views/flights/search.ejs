@@ -178,7 +178,6 @@
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 <script>
-
     var flightSearchResults;
     var screenMode = "search";
     var template = _.template($('#flights-template').html());
@@ -230,6 +229,18 @@
             render();
         });
     });
+
+    function bookItinerary(itinerary, price) {
+        fetch('/users/dash', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(itinerary, price)
+        })
+        .then(res => {
+            window.location.href = `${window.location.origin}/users/dash`;
+        });
+    }
 </script>
 
 <script src="/javascripts/autofill.js"></script> 

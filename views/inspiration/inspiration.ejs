@@ -36,6 +36,7 @@
         <div class="row container">
           <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
           <button id="new-destination" onclick="showNewDestination()" class="btn" style="display:none">New Destination!</button>
+          <button id="choose-destination" onclick="chooseDestination()" class="btn">Search For Flights!</button>
           <h2 class="header"><%%= currentDestination.city.name %></h2>
           <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
         </div>
@@ -67,6 +68,7 @@
     } else if (screenMode === "destinationView") {
       $('#search').hide();
       $('#destination-display').html(template({currentDestination})).show();
+      console.log(currentDestination);
       $('.parallax').parallax();
       preloadNextDestination();
     } else if (screenMode === "editSearch") {
@@ -117,7 +119,6 @@
   function showNewDestination() {
     currentDestinationIndex = nextDetinationIndex
     currentDestination = nextDestination;
-    console.log('in show new destination');
     screenMode = "destinationView";
     render();
   }
@@ -125,6 +126,14 @@
   function editSearch() {
     screenMode = "editSearch";
     render();
+  }
+
+  // function chooseDestination(currentDestination) {
+  //   fetch('/flights/search?inspiration=true', {
+  //     credentials: 'include',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({currentDestination, origin: $('#departure-city').val()})
+  //   });
   }
 
 </script>
