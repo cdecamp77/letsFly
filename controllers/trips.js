@@ -127,6 +127,7 @@ module.exports = {
     flightSearch,
     hotelSearch,
     index,
+    createFlights,
     insp,
     getInspirationData,
     updateInspirationData,
