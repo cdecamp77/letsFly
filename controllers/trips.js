@@ -18,7 +18,9 @@ function hotelSearch (req, res) {
 }
 
 function index (req, res) {
-    Trip.find({}).exec((err, trips) => {
+    req.user.trips.populate('trips').exec((err, user) => {
+        res.render('./users/dash', {user});
+    });
         // calendar.addEvent(req.user.googleToken, 'destination', new Date().toISOString(), new Date().toISOString())
         // .then(function(events) {
         //     console.log(events);
@@ -30,8 +32,6 @@ function index (req, res) {
         // .catch(function(err) {
         //     console.log(err);
         // });
-        res.render('./users/dash', { trips, user: req.user });
-    });
 }
 
 function createFlights(req, res) {
