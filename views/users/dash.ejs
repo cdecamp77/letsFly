@@ -11,7 +11,7 @@
         <div class="card-header cyan darken-3">
             <div class="card-title">
                 <h4 class="white-text flight-card-title" style="margin-left: 30px">Upcoming Flights</h4>
-                <p class="white-text" style="margin-left: 30px"><%= trip.departureDate.toString() %>></p>
+                <p class="white-text" style="margin-left: 30px"><%= trip.departureDate.toString().slice(0,15) %></p>
             </div>
         </div>
         <div class="card-content-bg white-text">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="col s4 center-align">
                         <div class="flight-state">
-                            <h4 class="white-text" style="margin-bottom: 5px"><%= flight.destination %>/h4>
+                            <h4 class="white-text" style="margin-bottom: 5px"><%= flight.destination %></h4>
                             <p class="white-text"><%= flight.arrivalCity %></p>
                         </div>
                     </div>    
@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col s4 center-align">
                         <div class="flight-info">
-                            <p class="white-text">Depart: <%= flight.departureTime %></p>
+                            <p class="white-text">Depart: <%= flight.departureTime.toString().slice(0,21) %></p>
                             <p class="white-text">Airline: <%= flight.airline %></p>
                             <p class="white-text">Flight Number: <%= flight.flightNumber %></p>
                         </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col s4 center-align flight-state-two">
                         <div class="flight-info">
-                            <p class="white-text">Arrive: <%= flight.arrivalTime %></p>
+                            <p class="white-text">Arrive: <%= flight.arrivalTime.toString().slice(0,21) %></p>
                             <p class="white-text">Airline: <%= flight.airline %></p>
                             <p class="white-text">Flight Number: <%= flight.flightNumber %></p>
                         </div>
