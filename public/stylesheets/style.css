@@ -27,6 +27,21 @@ main {
   background-color: rgb(173, 173, 173);
   /* background-blend-mode: multiply; */
 }
+.error {
+  background-image: url("https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/404.png");
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover !important; 
+  background-color: rgb(173, 173, 173);
+  /* background-blend-mode: multiply; */
+}
+.error-content {
+  align-items: flex-end; 
+  display: flex; 
+  justify-content: center;
+  margin-top: 330px; 
+}
 #logo img{
   max-width: 300px;
   max-height: 390px;
