@@ -1,0 +1,21 @@
+<form action="/trips/<%= tripId %>" method="POST">
+  <% itinerary.outbound.flights.forEach(flight => { %>
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[outbound]" value="true">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[origin]" value="<%= flight.origin.airport %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[destination]" value="<%= flight.destination.airport %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[depatureTime]" value="<%= flight.departs_at %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[arrivalTime]" value="<%= flight.arrives_at %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[airline]" value="<%= flight.marketing_airline %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[flightNumber]" value="<%= flight.flight_number %>">
+  <% }) %>
+  <% itinerary.inbound.flights.forEach(flight => { %>
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[outbound]" value="false">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[origin]" value="<%= flight.origin.airport %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[destination]" value="<%= flight.destination.airport %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[depatureTime]" value="<%= flight.departs_at %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[arrivalTime]" value="<%= flight.arrives_at %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[airline]" value="<%= flight.marketing_airline %>">
+    <input type="hidden" name="<%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[flightNumber]" value="<%= flight.flight_number %>">    
+  <% }) %> 
+  <button class="waves-effect deep-orange lighten-1 waves-light btn-large" type="submit"><i class="material-icons right">insert_invitation</i>Book</button>
+</form>

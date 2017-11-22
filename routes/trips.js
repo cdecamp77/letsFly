@@ -3,16 +3,18 @@ var router = express.Router();
 var tripsCtrl = require('../controllers/trips');
 
 router.get('/', tripsCtrl.root);
+
+// trips/new
 router.get('/flights/search', isLoggedIn, tripsCtrl.flightSearch);
-router.post('/flights/search', isLoggedIn, tripsCtrl.getFlightData);
-router.get('/hotels/search', isLoggedIn, tripsCtrl.hotelSearch);
+router.post('/flights/results', isLoggedIn, tripsCtrl.getFlightData);
+router.post('/trips/:id', isLoggedIn, tripsCtrl.bookFlights);
 // added post for hotels below
+router.get('/hotels/search', isLoggedIn, tripsCtrl.hotelSearch);
 router.post('/hotels/search', isLoggedIn, tripsCtrl.getHotelData);
 
 router.get('/trips', isLoggedIn, tripsCtrl.index);
+
 router.get('/inspirations', isLoggedIn, tripsCtrl.insp);
-router.get('/users/dash', isLoggedIn, tripsCtrl.index);
-// router.post('/users/dash', isLoggedIn, tripsCtrl.createFlights);
 router.post('/inspiration/search', isLoggedIn, tripsCtrl.getInspirationData);
 router.post('/inspiration/new', isLoggedIn, tripsCtrl.updateInspirationData);
 

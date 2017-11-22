@@ -10,26 +10,7 @@ function root (req, res) {
 }
 
 function flightSearch (req, res) {
-    var activeTrip;
-    Trip.findOne({active: true}, (err, trip) => {
-        if (err) {}
-        if (!trip) {
-            var newTrip = new Trip();
-            if (newTrip.save()) {
-                req.user.trips.push(newTrip);
-                req.user.save();
-                activeTrip = newTrip;
-            }
-        } else {
-            activeTrip = trip;
-        }
-    });
-    if (req.query.inspiration) {
-        var body = req.body;
-        res.render('./flights/search', { user: req.user, activeTrip, origin: body.origin, destination: body.currentDestination});
-    } else {
-        res.render('./flights/search', { user: req.user, activeTrip, origin: null, destination: null });
-    }
+    res.render('./flights/search', { user: req.user});
 }
 
 function hotelSearch (req, res) {
@@ -37,7 +18,7 @@ function hotelSearch (req, res) {
 }
 
 function index (req, res) {
-    Trip.find({}).populate('Flight').populate('Hotel').exec((err, trips) => {
+    Trip.find({}).exec((err, trips) => {
         // calendar.addEvent(req.user.googleToken, 'destination', new Date().toISOString(), new Date().toISOString())
         // .then(function(events) {
         //     console.log(events);
@@ -102,13 +83,22 @@ function updateInspirationData (req, res) {
 function getFlightData (req, res) {
     var body = req.body;
     var retDate;
-    !body.returnDate ? retDate = '' : retDate = `&return_date=${body.returnDate}`;
-    request(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.origin}&destination=${body.destination}&departure_date=${body.departureDate}&adults=${body.adults}&number_of_results=20${retDate}`, (err, response, flights) => {
-        var searchResults = JSON.parse(flights);
-        res.json(searchResults).status(200);
+    var newTrip = new Trip({departureCity: body.departureCity, arrivalCity: body.arrivalCity, travelers: body.travelers});
+    newTrip.save(err => {
+        if (err) return res.render('./flights/search', {user: req.user});
+        req.user.trips.push(newTrip);
+        req.user.save(err => {
+            if (err) return res.render('./flights/search', {user: req.user});
+            !body.returnDate ? retDate = '' : retDate = `&return_date=${body.returnDate}`;
+            request(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.departureCity.slice(-4, -1)}&destination=${body.arrivalCity.slice(-4, -1)}&departure_date=${body.departureDate}&adults=${body.travelers}&number_of_results=20${retDate}`, (err, response, flights) => {
+                    var searchResults = JSON.parse(flights);
+                    console.log(searchResults);
+                    res.render('./flights/results', { user: req.user, flightSearchResults: searchResults, tripId: newTrip._id});
+            });
+        });
     });
 }
-
+            
 // api call to grab hotel info
 function getHotelData (req, res) {
     var body = req.body;
@@ -118,6 +108,21 @@ function getHotelData (req, res) {
         var hotelResults = JSON.parse(hotels);
         res.json(hotelResults).status(200);
     });
+}
+
+function bookFlights(req, res) {
+    var body = req.body;
+    Trip.findById(req.params.id, (err, trip) => {
+        for (flight in body) {
+            var newFlight = {outbound: body[flight].outbound, origin: body[flight].origin, destination: body[flight].destination, departureTime: Date.parse(body[flight].departureTime), arrivalTime: Date.parse(body[flight].arrivalTime), airline: body[flight].airline, flightNumber: body[flight].flightNumber};
+            trip.flights.push(newFlight);
+        }
+        trip.save( err => {
+            // if (err) return res.render('./flights/search', {user: req.user});
+            console.log(trip);
+            res.redirect('/trips');
+        })
+    })
 }
 
 module.exports = {
@@ -130,5 +135,6 @@ module.exports = {
     getInspirationData,
     updateInspirationData,
     getFlightData,
-    getHotelData
+    getHotelData,
+    bookFlights
 }

@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var flightSchema = new Schema ({
-  outbound: {type: Boolean, default: null, required: true},
-  origin: {type: String, required: true},
-  destination: {type:String, required: true},
+  outbound: Boolean,
+  origin: String,
+  destination: String,
   departureTime: Date,
   arrivalTime: Date,
-  marketingAirline: String,
+  airline: String,
   flightNumber: String,
   },
   {
@@ -15,4 +15,4 @@ var flightSchema = new Schema ({
   }
 );
 
-module.exports = mongoose.model('Flight', flightSchema);
+module.exports = flightSchema;

@@ -16,7 +16,7 @@
           </div>
           <div class="row">
             <div class="col s12">
-              <input type="button" onclick="submitInspirationSearch()" class="btn white-text" value="Search!">
+              <button id="inspiration-search" type="button" onclick="submitInspirationSearch()" class="btn waves-effect waves-light col s4 btn-large">Search</button>
             </div>
           </div>
         </form>
@@ -60,13 +60,16 @@
   var screenMode = "search";
   var template = _.template($('#destination-template').html());
 
-  
+  var preloader = `<div class="progress">
+      <div class="indeterminate"></div>
+  </div> `;
 
   function render() {
     if (screenMode === "search") {
       return;
     } else if (screenMode === "destinationView") {
       $('#search').hide();
+      $('#inspiration-search').html('Search');
       $('#destination-display').html(template({currentDestination})).show();
       console.log(currentDestination);
       $('.parallax').parallax();
@@ -79,6 +82,7 @@
   
   function submitInspirationSearch() { 
     if ( !$('#departure-city').val() ) return;
+    $('#inspiration-search').html(preloader);
     
     fetch('/inspiration/search', {
       method: 'POST',

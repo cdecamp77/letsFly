@@ -1,34 +1,34 @@
 <%- include ../header.ejs %>
 
 <div class="container" id="flightForm">
-    <h1 class="deep-orange-text text-lighten-1 center flight-card-title"> Flight Search</h1>
+    <h1 class="deep-orange-text text-lighten-1 center flight-card-title">Flight Search</h1>
     <div class="row">
-        <form class="col s12">
-            <div class="row city">
+        <form action="/flights/results" method="POST" class="col s12">
+            <div class="row">
                 <div class="input-field col s12">
-                    <input id="departure-city" type="text" class="autocomplete validate">
+                    <input id="departure-city" type="text" class="autocomplete validate" name="departureCity">
                     <label for="departure-city">Departure City</label>
                 </div>
             </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="destination" type="text" class="autocomplete validate">
+                        <input id="destination" type="text" class="autocomplete validate" name="arrivalCity">
                         <label for="destination">Destination</label>
                     </div>
                 </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="departure-date" type="text" class="datepicker">
+                    <input id="departure-date" type="text" class="datepicker" name="departureDate">
                     <label for="departure-date">Departure Date</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="return-date" type="text" class="datepicker">
+                    <input id="return-date" type="text" class="datepicker" name="returnDate">
                     <label for="return-date">Return Date</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <select id="adults">
+                    <select id="adults" name="travelers">
                         <option value="" disabled selected>Number of Travelers</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -41,200 +41,21 @@
                 </div>
             </div>
             <div class="row">
-                <button id="flight-search" type="button" class="btn waves-effect waves-light col s4 btn-large" onclick="submitFlightSearch()">Search</button>
+                <button id="flight-search" type="submit" class="btn waves-effect waves-light col s4 btn-large" name="action">Search</button>
             </div>
         </form>
     </div>
 </div>
 
-
-<!-- search results -->
-<section style="display:none" class="container" id="results">
-    <section id="flights-display">
-                
-    </section>
-        
-    <div class="row">
-        <div class="col s12">
-            <button id="flightEdit" class="btn waves-effect waves-light btn-large" type="submit" name="action" style="display:none">Edit Flight Search</button>
-        </div>
-    </div>
-</section>
-
-<!-- flightstemplate -->
-<script type="text/template" id="flights-template">
-<!-- iterate over flights array, iteneraries -->
-<div class="row">
-    <h1 class="deep-orange-text text-lighten-1 center flight-card-title">Flight Itineraries</h1>
-    <div class="divider"></div>
-</div>
-<%% flightSearchResults.results.forEach(result => { %>
-    <%% result.itineraries.forEach(itinerary => { %>
-        <div class ="row">
-            <div class="card cyan darken-3 col s12 m5" style="padding: 10px">
-                <div class="card-header cyan darken-3">
-                    <div class="card-title">
-                        <h4 class="white-text flight-card-title" style="margin-left: 4px">Outbound</h4>
-                    </div>
-                </div>
-                <div class="card-content-bg white-text">
-                    <div class="card-content cyan darken-2">
-                        <%% itinerary.outbound.flights.forEach(flight => { %>
-                            <div class="row">
-                                <div class="col s4 center-align">
-                                    <div class="flight-state">
-                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.origin.airport %></h4>
-                                        <p class="white-text"><%%= flight.flight_number %></p>
-                                    </div>
-                                </div>
-                                <div class="col s4 center-align">
-                                        <i class="small material-icons white-text" style="transform: rotate(90deg); margin-top: 20px">flight</i>
-                                </div>
-                                <div class="col s4 center-align">
-                                    <div class="flight-state">
-                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.destination.airport %></h4>
-                                    </div>
-                                </div>    
-                            </div>
-                            <div class="row">
-                                <div class="col s4 center-align">
-                                    <div class="flight-info">
-                                        <p class="white-text">Departs: <%%= flight.departs_at %></p>
-                                        <p class="white-text">Airline: <%%= flight.marketing_airline %></p>
-                                        <p class="white-text">Terminal: <%%= flight.origin.terminal %></p>
-                                    </div>
-                                </div>
-                                <div class="col s4 center-align">
-                                        <i class="medium material-icons white-text"></i>
-                                </div>
-                                <div class="col s4 center-align flight-state-two">
-                                    <div class="flight-info">
-                                        <p class="white-text">Arrives: <%%= flight.arrives_at %></p>
-                                        <p class="white-text">Terminal: <%%= flight.destination.terminal %></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <%% }) %>                            
-                    </div>
-                </div>
-            </div>
-            <div class="card teal lighten-1 col s12 m5" style="padding: 10px">
-                <div class="card-header teal lighten-1">
-                    <div class="card-title">
-                        <h4 class="white-text flight-card-title" style="margin-left: 4px">Inbound</h4>
-                    </div>
-                </div>
-                <div class="card-content-bg white-text">
-                    <div class="card-content teal lighten-2">
-                        <%% itinerary.inbound.flights.forEach(flight => { %>
-                            <div class="row">
-                                <div class="col s4 center-align">
-                                    <div class="flight-state">
-                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.origin.airport %></h4>
-                                        <p class="white-text"><%%= flight.flight_number %></p>
-                                    </div>
-                                </div>
-                                <div class="col s4 center-align">
-                                        <i class="small material-icons white-text" style="transform: rotate(90deg); margin-top: 20px">flight</i>
-                                </div>
-                                <div class="col s4 center-align">
-                                    <div class="flight-state">
-                                        <h4 class="white-text" style="margin-bottom: 5px"><%%= flight.destination.airport %></h4>
-                                    </div>
-                                </div>    
-                            </div>
-                            <div class="row">
-                                <div class="col s4 center-align">
-                                    <div class="flight-info">
-                                        <p class="white-text">Departs: <%%= flight.departs_at %></p>
-                                        <p class="white-text">Airline: <%%= flight.marketing_airline %></p>
-                                        <p class="white-text">Terminal: <%%= flight.origin.terminal %></p>
-                                    </div>
-                                </div>
-                                <div class="col s4 center-align">
-                                        <i class="medium material-icons white-text"></i>
-                                </div>
-                                <div class="col s4 center-align flight-state-two">
-                                    <div class="flight-info">
-                                        <p class="white-text">Arrives: <%%= flight.arrives_at %></p>
-                                        <p class="white-text">Terminal: <%%= flight.destination.terminal %></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <%% }) %>                            
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m2">
-                <p class="blue-grey-text">Price:</p>
-                <h4 class="flight-card-title blue-grey-text">$<%%= result.fare.total_price %></h4>
-                <a class="waves-effect deep-orange lighten-1 waves-light btn-large" type="button" onclick="bookItinerary(<%%= itinerary %>)"><i class="material-icons right">insert_invitation</i>Book</a>
-            </div>
-        </div>
-    <%% }) %>
-<%% }) %>
-
-    
-</script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 <script>
-    var flightSearchResults;
-    var screenMode = "search";
-    var template = _.template($('#flights-template').html());
     var preloader = `<div class="progress">
             <div class="indeterminate"></div>
         </div> `;
-    function render() {
-        if (screenMode === "search") {
-      return;
-        } else if (screenMode === "flightsView") {
-            $('#flights-display').html(template({flightSearchResults}));
-            $('#flightForm').hide();
-            $('#flight-search').html('Search');
-            $('#results').show();
-            $("#flightEdit").show();
-        } else if (screenMode === "editSearch") {
-            $('#flightForm').show();
-            $('#results').hide();
-            $("#flightEdit").hide();
-        }
-    }
-    function submitFlightSearch() { 
-    // if ( !$('#departure-city').val() || !$('#arrival-city').val() || !$('#departure-date').val() || !$('#return-date').val() || !$('#adults').val() ) return;
-        console.log('insubmitflightsearch')
+
+    $('#flight-search').on('click', evt => {
         $('#flight-search').html(preloader);
-        console.log('about to fetch');
-        fetch('/flights/search', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ origin: $('#departure-city').val().slice(-4, -1), destination: $('#destination').val().slice(-4, -1), departureDate: $('#departure-date').val(), returnDate: $('#return-date').val(), adults: $('#adults').val() })
-        })
-        .then(res => res.json())
-        .then(data => {
-            flightSearchResults = data;
-            screenMode = "flightsView";
-            console.log(flightSearchResults)
-            render();
-        });
-    }
-    $(document).ready(function() {
-        $("#flightEdit").on('click', function(e) {
-            screenMode = "editSearch";
-            render();
-        });
     });
-    // function bookItinerary(itinerary, price) {
-    //     fetch('/users/dash', {
-    //         method: 'POST',
-    //         credentials: 'include',
-    //         headers: { 'Content-Type': 'application/json'},
-    //         body: JSON.stringify(itinerary, price)
-    //     })
-    //     .then(res => {
-    //         window.location.href = `${window.location.origin}/users/dash`;
-    //     });
-    // }
+
 </script>
 
 <script src="/javascripts/autofill.js"></script> 
