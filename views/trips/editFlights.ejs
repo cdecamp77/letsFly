@@ -2,7 +2,7 @@
 
 <section class="container" id="flights-display">
   <div class="row">
-    <h1 class="deep-orange-text text-lighten-1 center flight-card-title">Trip Itineraries</h1>
+    <h1 class="deep-orange-text text-lighten-1 center flight-card-title">Flight Itineraries</h1>
     <div class="divider"></div>
   </div>
   <div class="row">
@@ -110,7 +110,7 @@
         <div class="col s12 m2">
           <p class="blue-grey-text">Price:</p>
           <h4 class="flight-card-title blue-grey-text">$<%= result.fare.total_price %></h4>
-          <form action="/trips/<%= tripId %>" method="POST">
+          <form action="/trips/<%= tripId %>/edit" method="POST">
             <% itinerary.outbound.flights.forEach(flight => { %>
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[outbound]" value="true">
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[origin]" value="<%= flight.origin.airport %>">

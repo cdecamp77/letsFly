@@ -2,9 +2,11 @@
 
 <h1 class="deep-orange-text text-lighten-1 center flight-card-title"><%= user.name %>'s Dashboard</h1>
 <div class="container" style="margin-bottom: 50px">
+
     <% user.trips.forEach(trip => { %>
         <% if (trip.flights.length > 0) { %>
             <% if (trip.flights[0].departureTime > Date.now()) { %>
+
     <div class="card cyan darken-3">
         <div class="card-header cyan darken-3">
             <div class="card-title">
