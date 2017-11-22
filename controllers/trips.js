@@ -19,7 +19,10 @@ function hotelSearch (req, res) {
 }
 
 function index (req, res) {
+
+
     User.findById(req.user._id).populate('trips').exec((err, user) => {
+
         res.render('./users/dash', {user});
     });
         // calendar.addEvent(req.user.googleToken, 'destination', new Date().toISOString(), new Date().toISOString())
