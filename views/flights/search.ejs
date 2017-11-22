@@ -181,11 +181,9 @@
     var flightSearchResults;
     var screenMode = "search";
     var template = _.template($('#flights-template').html());
-
     var preloader = `<div class="progress">
             <div class="indeterminate"></div>
         </div> `;
-
     function render() {
         if (screenMode === "search") {
       return;
@@ -201,25 +199,42 @@
             $("#flightEdit").hide();
         }
     }
-
+    function submitFlightSearch() { 
+    // if ( !$('#departure-city').val() || !$('#arrival-city').val() || !$('#departure-date').val() || !$('#return-date').val() || !$('#adults').val() ) return;
+        console.log('insubmitflightsearch')
+        $('#flight-search').html(preloader);
+        console.log('about to fetch');
+        fetch('/flights/search', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ origin: $('#departure-city').val().slice(-4, -1), destination: $('#destination').val().slice(-4, -1), departureDate: $('#departure-date').val(), returnDate: $('#return-date').val(), adults: $('#adults').val() })
+        })
+        .then(res => res.json())
+        .then(data => {
+            flightSearchResults = data;
+            screenMode = "flightsView";
+            console.log(flightSearchResults)
+            render();
+        });
+    }
     $(document).ready(function() {
         $("#flightEdit").on('click', function(e) {
             screenMode = "editSearch";
             render();
         });
     });
-
-    function bookItinerary(itinerary, price) {
-        fetch('/users/dash', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(itinerary, price)
-        })
-        .then(res => {
-            window.location.href = `${window.location.origin}/users/dash`;
-        });
-    }
+    // function bookItinerary(itinerary, price) {
+    //     fetch('/users/dash', {
+    //         method: 'POST',
+    //         credentials: 'include',
+    //         headers: { 'Content-Type': 'application/json'},
+    //         body: JSON.stringify(itinerary, price)
+    //     })
+    //     .then(res => {
+    //         window.location.href = `${window.location.origin}/users/dash`;
+    //     });
+    // }
 </script>
 
 <script src="/javascripts/autofill.js"></script> 
