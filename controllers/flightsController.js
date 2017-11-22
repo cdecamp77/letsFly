@@ -1,5 +1,5 @@
 var Flight = require('../models/flight');
-
+var flightsCtrl = require('../controllers/flightsController');
 
 function flightSearch (req, res) {
     var activeTrip;
@@ -18,9 +18,9 @@ function flightSearch (req, res) {
     });
     if (req.query.inspiration) {
         var body = req.body;
-        res.render('./flights/search', { user: req.user, activeTrip, origin: body.origin, destination: body.currentDestination});
+        res.render('./trips/results', { user: req.user, activeTrip, origin: body.origin, destination: body.currentDestination});
     } else {
-        res.render('./flights/search', { user: req.user, activeTrip, origin: null, destination: null });
+        res.render('./trips/new', { user: req.user, activeTrip, origin: null, destination: null });
     }
 }
 
@@ -48,6 +48,7 @@ function getFlightData (req, res) {
         res.json(searchResults).status(200);
     });
 }
+
 
 module.exports = {
     flightSearch,

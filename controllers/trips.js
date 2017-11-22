@@ -4,7 +4,7 @@ var Flight = require('../models/flight');
 var request = require('request');
 var calendar = require('../utilities/google-calendar');
 
-
+// moved to TC
 function root (req, res) {
     res.render('index', { user: req.user });
 }
@@ -13,10 +13,12 @@ function flightSearch (req, res) {
     res.render('./flights/search', { user: req.user});
 }
 
+// moved to HC
 function hotelSearch (req, res) {
     res.render('./hotels/search', { user: req.user });
 }
 
+// moved to TC
 function index (req, res) {
     Trip.find({}).exec((err, trips) => {
         // calendar.addEvent(req.user.googleToken, 'destination', new Date().toISOString(), new Date().toISOString())
@@ -34,6 +36,7 @@ function index (req, res) {
     });
 }
 
+// moved to FC
 function createFlights(req, res) {
     var itinerary = req.body.itinerary;
     var price = req.body.price
@@ -50,7 +53,7 @@ function createFlights(req, res) {
 }
 
 function insp (req, res) {
-    res.render('./inspiration/inspiration', {user: req.body.user});
+    res.render('./inspiration/inspiration', {user: req.user});
 }
 
 function getInspirationData (req, res) {
@@ -80,6 +83,8 @@ function updateInspirationData (req, res) {
     });
 }
 
+
+// moved to FC
 function getFlightData (req, res) {
     var body = req.body;
     var retDate;
@@ -99,7 +104,7 @@ function getFlightData (req, res) {
     });
 }
             
-// api call to grab hotel info
+// moved to HC
 function getHotelData (req, res) {
     var body = req.body;
     var hotelLocation = location;
@@ -110,6 +115,8 @@ function getHotelData (req, res) {
     });
 }
 
+
+// moved to TC
 function bookFlights(req, res) {
     var body = req.body;
     Trip.findById(req.params.id, (err, trip) => {
