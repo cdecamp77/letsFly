@@ -5,90 +5,14 @@ var Flight = require('../models/flight');
 var request = require('request');
 var calendar = require('../utilities/google-calendar');
 
-// moved to TC
 function root (req, res) {
     res.render('index', { user: req.user });
 }
 
-function flightSearch (req, res) {
+function tripSearch (req, res) {
     res.render('./flights/search', { user: req.user});
 }
 
-// moved to HC
-function hotelSearch (req, res) {
-    res.render('./hotels/search', { user: req.user });
-}
-
-// moved to TC
-function index (req, res) {
-
-
-    User.findById(req.user._id).populate('trips').exec((err, user) => {
-
-        res.render('./users/dash', {user});
-    });
-        // calendar.addEvent(req.user.googleToken, 'destination', new Date().toISOString(), new Date().toISOString())
-        // .then(function(events) {
-        //     console.log(events);
-        // });
-        // calendar.listEvents(req.user.googleToken)
-        // .then(function(response) {
-        //     console.log(response);
-        // })
-        // .catch(function(err) {
-        //     console.log(err);
-        // });
-}
-
-// moved to FC
-function createFlights(req, res) {
-    var itinerary = req.body.itinerary;
-    var price = req.body.price
-    itinerary.outbound.flights.forEach(flight => {
-        var newFlight = new Flight({outbound: true, origin: flight.origin.airport, destination: flight.destination.airport, departureTime: Date.parse(flight.departs_at), arrivalTime: Date.parse(flight.arrives_at), marketingAirline: flight.marketing_airline, operatingAirline: flight.operating_airline, flightNumber: flight.flight_number});
-        newFlight.save();
-        User.findById(req.user._id).populate('trips').find({'trips.active': true}).exec((err, user) => {
-            user.trips.find({active: true}, (err, trip) => {
-                trip.flightsCost = price;
-                trip.flights.push()
-    });
-        })
-    })
-}
-
-function insp (req, res) {
-    res.render('./inspiration/inspiration', {user: req.user});
-}
-
-function getInspirationData (req, res) {
-    var body = req.body;
-    request({ url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.origin}&destination=${body.destination}`}, (err, response, body) => {
-        var searchResults = JSON.parse(body);   
-        request(`http://api.sandbox.amadeus.com/v1.2/location/${searchResults.results[0].destination}/?apikey=${process.env.AMADEUS_TOKEN}`, (err, response, body) => {
-            searchResults.results[0].city = JSON.parse(body).city;
-            request(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(searchResults.results[0].city.name)}`, (err, response, body) => {
-                searchResults.results[0].description = JSON.parse(body);
-                res.json(searchResults).status(200);
-            });
-        });
-    });
-}
-
-function updateInspirationData (req, res) {
-    var body= req.body;
-    var updatedDestination = body.nextDestination;
-    request(`http://api.sandbox.amadeus.com/v1.2/location/${body.nextDestination.destination}/?apikey=${process.env.AMADEUS_TOKEN}`, (err, response, body) => {
-        updatedDestination.city = JSON.parse(body).city;
-        console.log(updatedDestination);
-        request(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(updatedDestination.city.name)}`, (err, response, body) => {
-            updatedDestination.description = JSON.parse(body);
-            res.json(updatedDestination).status(200);
-        });
-    });
-}
-
-
-// moved to FC
 function getFlightData (req, res) {
     var body = req.body;
     var retDate;
@@ -108,19 +32,6 @@ function getFlightData (req, res) {
     });
 }
             
-// moved to HC
-function getHotelData (req, res) {
-    var body = req.body;
-    var hotelLocation = location;
-    
-    request(`https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=${process.env.AMADEUS_TOKEN}&location=${body.hotelLocation}&check_in=${body.checkin_date}&check_out=${body.checkout_date}&radius=42&number_of_results=10`, (err, response, hotels) => {
-        var hotelResults = JSON.parse(hotels);
-        res.json(hotelResults).status(200);
-    });
-}
-
-
-// moved to TC
 function bookFlights(req, res) {
     var body = req.body;
     Trip.findById(req.params.id, (err, trip) => {
@@ -142,6 +53,12 @@ function bookFlights(req, res) {
             }
         })
     })
+}
+
+function index (req, res) {
+    User.findById(req.user._id).populate('trips').exec((err, user) => {
+        res.render('./users/dash', {user});
+    });
 }
 
 function edit(req, res) {
@@ -194,19 +111,12 @@ function deleteTrip(req, res) {
     })
 }
 
-
 module.exports = {
     root, 
-    flightSearch,
-    hotelSearch,
-    index,
-    createFlights,
-    insp,
-    getInspirationData,
-    updateInspirationData,
+    tripSearch,
     getFlightData,
-    getHotelData,
     bookFlights,
+    index,
     edit,
     editTripFlights,
     editBookedFlights,

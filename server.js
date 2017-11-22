@@ -20,6 +20,7 @@ require('./config/passport');
 var oauth = require('./routes/oauth');
 var trips = require('./routes/trips');
 var api = require('./routes/api');
+var inspirations = require('./routes/inspirations');
 
 
 // view engine setup
@@ -45,6 +46,7 @@ app.use(require('method-override')('_method'));
 app.use('/api', api);
 app.use('/', trips);
 app.use('/', oauth);
+app.use('/', inspirations);
 
 
 // catch 404 and forward to error handler

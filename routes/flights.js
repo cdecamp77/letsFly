@@ -4,7 +4,7 @@ var flightsCtrl = require('../controllers/flightsController');
 
 
 router.post('/trips/:id/flights/results', isLoggedIn, flightsCtrl.getFlightData);
-router.post('/trips/:id/flights', isLoggedIn, flightsCtrl.bookFlights);
+
 
 module.exports = router;
 
