@@ -38,10 +38,10 @@ main {
   color: #275E63 !important;
 }
 nav, footer{
-  background-color: #68B3AB !important;
+  background-color: #80cbc4 !important;
 }
 .footer-copyright{
-  background-color: #68B3AB !important;
+  background-color: #80cbc4 !important;
 }
 #myform {
   text-align: center;
@@ -91,12 +91,29 @@ table.highlight tbody tr:hover {
   background-color: #b2dfdb !important;
   color: #00695c !important;
 }
+/* label text focus color */
+.input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+  color: #4095A5 !important;
+ }
+
+/* label underline focus color */
+ .input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #4095A5 !important;
+  box-shadow: 0 1px 0 0 #4095A5 !important;
+ }
+ /* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #50A39A;
+  box-shadow: 0 1px 0 0 #50A39A;
+ }
+ /* invalid color */
+ .input-field input[type=text].invalid {
+  border-bottom: 1px solid #ED6237;
+  box-shadow: 0 1px 0 0 #ED6237;
+ }
+ /* icon prefix focus color */
+ .input-field .prefix.active {
+  color: #ED6237;
+ }
 input.qtyplus { width:25px; height:25px;}
 input.qtyminus { width:25px; height:25px;}
-/* @media only screen and (min-width: 400px) {
-  .bg {
-    background-image: url("https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/egzon-bytyqi-310216.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-} */
