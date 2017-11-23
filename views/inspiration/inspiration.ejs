@@ -1,7 +1,10 @@
 <%- include ../header.ejs %>
+<body  onload="randombg()">
 <main></main>
+<h1 class="deep-orange-text text-lighten-1 center flight-card-title">Random Trips</h1>
   <section id="search">
     <div class="container">
+    <div class="row"><img id="random" src="" class="col s12 responsive-img"></div>
       <div class="row">
         <form class="col s12" action="/inspirations" method="POST">
           <div class="row">
@@ -50,6 +53,22 @@
 
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+
+<script>
+function randombg(){
+  var random = Math.floor(Math.random() * 9) + 0;
+  var bigSize = ['https://i.imgur.com/nruvJeb.jpg', 
+                 'https://i.imgur.com/wAsxQzx.jpg',
+                 'https://i.imgur.com/7atabBq.jpg',
+                 'https://i.imgur.com/qDiMxsG.jpg',
+                 'https://i.imgur.com/ugoD6Ng.jpg',
+                 'https://i.imgur.com/GgXgiJD.jpg',
+                 'https://i.imgur.com/nruvJeb.jpg',
+                 'https://i.imgur.com/lxJP0AC.jpg',
+                 'https://i.imgur.com/qff3Lhs.jpg'];
+  $("#random").attr("src",bigSize[random]);
+}
+</script>
 <script>
   var destinationResults;
   var currentDestination;

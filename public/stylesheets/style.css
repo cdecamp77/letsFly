@@ -132,3 +132,12 @@ table.highlight tbody tr:hover {
  }
 input.qtyplus { width:25px; height:25px;}
 input.qtyminus { width:25px; height:25px;}
+
+/* #search {
+  height: 100%;
+  
+  background-image: url('https://i.imgur.com/lxJP0AC.jpg');
+  background-position: center center;
+  background-size: cover !important;
+  background-repeat: no-repeat;  
+} */
