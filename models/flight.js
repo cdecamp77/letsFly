@@ -9,6 +9,7 @@ var flightSchema = new Schema ({
   arrivalTime: Date,
   airline: String,
   flightNumber: String,
+  itineraryPrice: String
   },
   {
     timestamps: true
