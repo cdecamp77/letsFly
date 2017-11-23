@@ -42,6 +42,10 @@ main {
   justify-content: center;
   margin-top: 330px; 
 }
+#right {
+  position: absolute;
+  right: 32px;
+}
 #logo img{
   max-width: 300px;
   max-height: 390px;
