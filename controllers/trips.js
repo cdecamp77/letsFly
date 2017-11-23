@@ -35,8 +35,10 @@ function getFlightData (req, res) {
 function bookFlights(req, res) {
     var body = req.body;
     Trip.findById(req.params.id, (err, trip) => {
+    
         for (flight in body) {
             var flightObject = body[flight];
+            // calendar.addEvent(req.user.googleToken, 'destination', flightObject.departureTime, flightObject.arrivalTime)
             flightObject.departureTime = Date.parse(flightObject.departureTime);
             flightObject.arrivalTime = Date.parse(flightObject.arrivalTime);
             console.log(flightObject);
