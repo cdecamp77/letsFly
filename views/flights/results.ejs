@@ -119,6 +119,7 @@
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[arrivalTime]" value="<%= flight.arrives_at %>">
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[airline]" value="<%= flight.marketing_airline %>">
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[flightNumber]" value="<%= flight.flight_number %>">
+              <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[itineraryPrice]" value="<%= result.fare.total_price %>">
             <% }) %>
             <% itinerary.inbound.flights.forEach(flight => { %>
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[outbound]" value="false">
@@ -128,6 +129,7 @@
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[arrivalTime]" value="<%= flight.arrives_at %>">
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[airline]" value="<%= flight.marketing_airline %>">
               <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[flightNumber]" value="<%= flight.flight_number %>">    
+              <input type="hidden" name="<%= flight.origin.airport %><%= flight.operating_airline %><%= flight.flight_number %><%= flight.aircraft %>[itineraryPrice]" value="<%= result.fare.total_price %>">
             <% }) %> 
             <button class="waves-effect deep-orange lighten-1 waves-light btn-large" type="submit"><i class="material-icons right">insert_invitation</i>Book</button>
           </form>

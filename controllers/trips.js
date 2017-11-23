@@ -10,7 +10,7 @@ function root (req, res) {
 }
 
 function tripSearch (req, res) {
-    res.render('./flights/search', { user: req.user});
+    res.render('./flights/search', {user: req.user, inspirationDestination: req.destination});
 }
 
 function getFlightData (req, res) {
@@ -25,7 +25,6 @@ function getFlightData (req, res) {
             !body.returnDate ? retDate = '' : retDate = `&return_date=${body.returnDate}`;
             request(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.departureCity.slice(-4, -1)}&destination=${body.arrivalCity.slice(-4, -1)}&departure_date=${body.departureDate}&adults=${body.travelers}&number_of_results=20${retDate}`, (err, response, flights) => {
                     var searchResults = JSON.parse(flights);
-                    console.log(searchResults);
                     res.render('./flights/results', { user: req.user, flightSearchResults: searchResults, tripId: newTrip._id});
             });
         });
@@ -41,7 +40,6 @@ function bookFlights(req, res) {
             // calendar.addEvent(req.user.googleToken, 'destination', flightObject.departureTime, flightObject.arrivalTime)
             flightObject.departureTime = Date.parse(flightObject.departureTime);
             flightObject.arrivalTime = Date.parse(flightObject.arrivalTime);
-            console.log(flightObject);
             // var newFlight = {outbound: flightObject.outbound, origin: flightObject.origin, destination: flightObject.destination, departureTime: Date.parse(flightObject.departureTime), arrivalTime: Date.parse(flightObject.arrivalTime), airline: flightObject.airline, flightNumber: flightObject.flightNumber};
             trip.flights.push(flightObject);
         }
@@ -50,7 +48,6 @@ function bookFlights(req, res) {
             if(err) {
                 console.log(err);
             } else {
-            console.log(trip);
             res.redirect('/trips');
             }
         })
@@ -59,6 +56,7 @@ function bookFlights(req, res) {
 
 function index (req, res) {
     User.findById(req.user._id).populate('trips').exec((err, user) => {
+        user.trips.reverse();
         res.render('./users/dash', {user});
     });
 }
@@ -91,7 +89,6 @@ function editBookedFlights(req, res) {
             var flightObject = body[flight];
             flightObject.departureTime = Date.parse(flightObject.departureTime);
             flightObject.arrivalTime = Date.parse(flightObject.arrivalTime);
-            console.log(flightObject);
             // var newFlight = {outbound: flightObject.outbound, origin: flightObject.origin, destination: flightObject.destination, departureTime: Date.parse(flightObject.departureTime), arrivalTime: Date.parse(flightObject.arrivalTime), airline: flightObject.airline, flightNumber: flightObject.flightNumber};
             trip.flights.push(flightObject);
         }
@@ -100,7 +97,6 @@ function editBookedFlights(req, res) {
             if(err) {
                 console.log(err);
             } else {
-            console.log(trip);
             res.redirect('/trips');
             }
         })

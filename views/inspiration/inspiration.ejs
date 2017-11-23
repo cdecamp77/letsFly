@@ -36,7 +36,7 @@
         <div class="row container">
           <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
           <button id="new-destination" onclick="showNewDestination()" class="btn" style="display:none">New Destination!</button>
-          <button id="choose-destination" onclick="chooseDestination()" class="btn">Search For Flights!</button>
+          <a href="/trips/new?destination=(<%%= currentDestination.destination %>)" id="choose-destination" class="btn">Choose Destination!</a>
           <h2 class="header"><%%= currentDestination.city.name %></h2>
           <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
         </div>
