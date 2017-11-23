@@ -10,7 +10,7 @@ function root (req, res) {
 }
 
 function tripSearch (req, res) {
-    res.render('./flights/search', { user: req.user});
+    res.render('./flights/search', {user: req.user, inspirationDestination: req.destination});
 }
 
 function getFlightData (req, res) {
@@ -57,6 +57,7 @@ function bookFlights(req, res) {
 
 function index (req, res) {
     User.findById(req.user._id).populate('trips').exec((err, user) => {
+        user.trips.reverse();
         res.render('./users/dash', {user});
     });
 }
