@@ -103,7 +103,7 @@ function randombg(){
     if ( !$('#departure-city').val() ) return;
     $('#inspiration-search').html(preloader);
     
-    fetch('/inspiration/search', {
+    fetch('/inspirations/search', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -126,7 +126,7 @@ function randombg(){
       nextDetinationIndex = currentDestinationIndex + 1;
     }
     nextDestination = destinationResults[nextDetinationIndex];
-    fetch('/inspiration/new', {
+    fetch('/inspirations/new', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

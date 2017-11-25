@@ -1,12 +1,10 @@
 var User = require('../models/user');
 var Trip = require('../models/trip');
-var Hotel = require('../models/hotel');
-var Flight = require('../models/flight');
 var request = require('request');
 var calendar = require('../utilities/google-calendar');
 
-function insp (req, res) {
-    res.render('./inspiration/inspiration', {user: req.user});
+function showInspirationPage (req, res) {
+    res.render('./inspirations/inspirations', {user: req.user});
 }
 
 function getInspirationData (req, res) {
@@ -37,7 +35,7 @@ function updateInspirationData (req, res) {
 }
 
 module.exports = {
-    insp,
+    showInspirationPage,
     getInspirationData,
     updateInspirationData
 }
