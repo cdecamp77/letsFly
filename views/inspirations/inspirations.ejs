@@ -10,7 +10,7 @@
         <form class="col s12" action="/inspirations" method="POST">
           <div class="row">
             <div class="input-field col s12">
-              <input id="departure-city" type="text" class="validate">
+              <input id="departure-city" type="text" class="autocomplete validate">
               <label for="departure-city">Departure City</label>
             </div>
           </div>
@@ -46,6 +46,7 @@
 </main>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+<script src="/javascripts/autofill.js"></script>
 <script>
   var destinationResults;
   var currentDestination;
@@ -92,7 +93,7 @@
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ origin: $('#departure-city').val() })
+      body: JSON.stringify({ origin: $('#departure-city').val().slice(-4, -1) })
     })
     .then(res => res.json())
     .then(data => {
