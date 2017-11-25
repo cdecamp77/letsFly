@@ -38,15 +38,13 @@ function bookTripFlights(req, res) {
             // calendar.addEvent(req.user.googleToken, 'destination', flightObject.departureTime, flightObject.arrivalTime)
             flightObject.departureTime = Date.parse(flightObject.departureTime);
             flightObject.arrivalTime = Date.parse(flightObject.arrivalTime);
-            // var newFlight = {outbound: flightObject.outbound, origin: flightObject.origin, destination: flightObject.destination, departureTime: Date.parse(flightObject.departureTime), arrivalTime: Date.parse(flightObject.arrivalTime), airline: flightObject.airline, flightNumber: flightObject.flightNumber};
             trip.flights.push(flightObject);
         }
         trip.save( err => {
-            // if (err) return res.render('./flights/search', {user: req.user});
-            if(err) {
-                console.log(err);
+            if (err) {
+                return res.render('./flights/search', {user: req.user});
             } else {
-            res.redirect('/trips');
+                res.redirect('/trips');
             }
         })
     })
