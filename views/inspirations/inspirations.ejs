@@ -1,18 +1,17 @@
 <%- include ../header.ejs %>
-<h1 class="deep-orange-text text-lighten-1 center flight-card-title">Random Trips</h1>
   <section id="search">
     <div class="container">
-    <div class="row"><img id="random" src="" class="col s12 responsive-img"></div>
+      <div class="row">
+        <h1 class="deep-orange-text text-lighten-1 center flight-card-title">Seek Inspiration</h1>
+      </div>
+      <div class="divider"></div>
+      <div class="row" id="image-container"><img id="random" class="col s12 responsive-img" src=""></div>
       <div class="row">
         <form class="col s12" action="/inspirations" method="POST">
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12">
               <input id="departure-city" type="text" class="validate">
               <label for="departure-city">Departure City</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="destination" type="text" class="validate">
-              <label for="destination">Destination (Optional)</label>
             </div>
           </div>
           <div class="row">
@@ -25,7 +24,7 @@
     </div>
   </section>
   <section id="destination-display">
-      <!-- destination -->
+      <!-- destination view template inserted here -->
   </section>
 
   <!-- underscore template for destination view -->
@@ -46,27 +45,7 @@
 
 </main>
 
-
-
-
-
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
-
-<script>
-function randombg(){
-  var random = Math.floor(Math.random() * 9) + 0;
-  var bigSize = ['https://i.imgur.com/nruvJeb.jpg', 
-                 'https://i.imgur.com/wAsxQzx.jpg',
-                 'https://i.imgur.com/7atabBq.jpg',
-                 'https://i.imgur.com/qDiMxsG.jpg',
-                 'https://i.imgur.com/ugoD6Ng.jpg',
-                 'https://i.imgur.com/GgXgiJD.jpg',
-                 'https://i.imgur.com/nruvJeb.jpg',
-                 'https://i.imgur.com/lxJP0AC.jpg',
-                 'https://i.imgur.com/qff3Lhs.jpg'];
-  $("#random").attr("src",bigSize[random]);
-}
-</script>
 <script>
   var destinationResults;
   var currentDestination;
@@ -76,10 +55,18 @@ function randombg(){
   var destinationDetails;
   var screenMode = "search";
   var template = _.template($('#destination-template').html());
-
+  
   var preloader = `<div class="progress">
-      <div class="indeterminate"></div>
-  </div> `;
+    <div class="indeterminate"></div>
+    </div> `;
+    
+  
+  $('#image-container').ready(() => {
+    var random = Math.floor(Math.random() * 9) + 0;
+    var bigSize = ['https://i.imgur.com/nruvJeb.jpg', 'https://i.imgur.com/wAsxQzx.jpg', 'https://i.imgur.com/7atabBq.jpg', 'https://i.imgur.com/qDiMxsG.jpg', 'https://i.imgur.com/ugoD6Ng.jpg', 'https://i.imgur.com/GgXgiJD.jpg', 'https://i.imgur.com/nruvJeb.jpg', 'https://i.imgur.com/lxJP0AC.jpg', 'https://i.imgur.com/qff3Lhs.jpg'];
+    $("#random").attr("src", bigSize[random]);
+  });
+
 
   function render() {
     if (screenMode === "search") {
@@ -105,7 +92,7 @@ function randombg(){
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ origin: $('#departure-city').val(), destination: $('#destination').val() })
+      body: JSON.stringify({ origin: $('#departure-city').val() })
     })
     .then(res => res.json())
     .then(data => {
@@ -148,17 +135,6 @@ function randombg(){
     screenMode = "editSearch";
     render();
   }
-
-  // function chooseDestination(currentDestination) {
-  //   fetch('/flights/search?inspiration=true', {
-  //     credentials: 'include',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({currentDestination, origin: $('#departure-city').val()})
-  //   });
-  // }
-
 </script>
-
-
 
 <%- include ../footer.ejs %>
