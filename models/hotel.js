@@ -14,7 +14,7 @@ var hotelSchema = new Schema ({
     zipCode: String,
     country: String
   },
-  totalPrice: Number
+  totalPrice: String
   },
   {
     timestamps: true

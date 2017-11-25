@@ -1,17 +1,15 @@
 var User = require('../models/user');
 var Trip = require('../models/trip');
-var Hotel = require('../models/hotel');
-var Flight = require('../models/flight');
 var request = require('request');
 var calendar = require('../utilities/google-calendar');
 
-function insp (req, res) {
-    res.render('./inspiration/inspiration', {user: req.user});
+function showInspirationPage (req, res) {
+    res.render('./inspirations/inspirations', {user: req.user});
 }
 
 function getInspirationData (req, res) {
     var body = req.body;
-    request({ url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.origin}&destination=${body.destination}`}, (err, response, body) => {
+    request({ url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.origin}`}, (err, response, body) => {
         var searchResults = JSON.parse(body);   
         request(`http://api.sandbox.amadeus.com/v1.2/location/${searchResults.results[0].destination}/?apikey=${process.env.AMADEUS_TOKEN}`, (err, response, body) => {
             searchResults.results[0].city = JSON.parse(body).city;
@@ -37,7 +35,7 @@ function updateInspirationData (req, res) {
 }
 
 module.exports = {
-    insp,
+    showInspirationPage,
     getInspirationData,
     updateInspirationData
 }

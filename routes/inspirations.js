@@ -1,10 +1,10 @@
 var express= require('express');
 var router = express.Router();
-var tripsCtrl = require('../controllers/inspirationsController');
+var inspCtrl = require('../controllers/inspirationsController');
 
-router.get('/inspirations', isLoggedIn, tripsCtrl.insp);
-router.post('/inspiration/search', isLoggedIn, tripsCtrl.getInspirationData);
-router.post('/inspiration/new', isLoggedIn, tripsCtrl.updateInspirationData);
+router.get('/inspirations', isLoggedIn, inspCtrl.showInspirationPage);
+router.post('/inspirations/search', isLoggedIn, inspCtrl.getInspirationData);
+router.post('/inspirations/new', isLoggedIn, inspCtrl.updateInspirationData);
 
 module.exports = router;
 

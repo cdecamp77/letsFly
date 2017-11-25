@@ -9,8 +9,6 @@ var tripSchema = new Schema ({
   departureDate: Date,
   returnDate: Date,
   travelers: {type: String},
-  flightCost: String,
-  hotelCost: String,
   flights: [Flight],
   hotels: [Hotel]
   },
@@ -18,5 +16,10 @@ var tripSchema = new Schema ({
     timestamps: true
   }
 );
+
+// virtual to calculate total trip cost (once hotel booking features are implemented this virtual will be updated)
+tripSchema.virtual('totalTripCost').get(function() {
+  return flights[0].itineraryPrice;
+});
 
 module.exports = mongoose.model('Trip', tripSchema);

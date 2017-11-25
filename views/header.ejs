@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="icon" href="https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/lets_fly_favicon.png" sizes="32x32">
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://screenfeedcontent.blob.core.windows.net/html/airports.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        
-        <title>Let's Fly</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/lets_fly_favicon.png" sizes="32x32">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://screenfeedcontent.blob.core.windows.net/html/airports.js"></script>
+    <title>Let's Fly</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar-fixed">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo"><i class="medium material-icons">flight</i>Let's Fly</a>
+        <a href="/" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/trips/new">Trip Search</a></li>
+          <li><a href="/inspirations">Random Vacation</a></li>
+          <% if (user) { %>
+            <li><a href="/trips">Dashboard</a></li>
+            <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+          <% } else { %>
+            <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
+          <% } %>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <% if (user) { %>
+          <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+          <% } else { %>
+          <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
+          <% } %>
+          <li><a href="/trips/new">Flight Search</a></li>
+          <li><a href="/inspirations">Random Vacation</a></li>
+          <li><a href="/trips">Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
 
-<header>
-  <nav class="navbar-fixed">
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo"><i class="medium material-icons">flight</i>Let's Fly</a>
-      <a href="/" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="/trips/new">Flight Search</a></li>
-        <li><a href="/inspirations">Random Vacation</a></li>
-        <li><a href="/trips">Dashboard</a></li>
-        <% if (user) { %>
-        <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
-        <% } else { %>
-        <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
-        <% } %>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <% if (user) { %>
-        <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
-        <% } else { %>
-        <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
-        <% } %>
-        <li><a href="/trips/new">Flight Search</a></li>
-        <li><a href="/inspirations">Random Vacation</a></li>
-        <li><a href="/trips">Dashboard</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-<main>
-
-<script>
-  $(".button-collapse").sideNav();
-</script>
+  <script>
+    $(".button-collapse").sideNav();
+  </script>
