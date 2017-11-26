@@ -10,7 +10,7 @@
         <form class="col s12" action="/inspirations" method="POST">
           <div class="row">
             <div class="input-field col s12">
-              <input id="departure-city" type="text" class="validate">
+              <input id="departure-city" type="text" class="autocomplete validate">
               <label for="departure-city">Departure City</label>
             </div>
           </div>
@@ -29,24 +29,44 @@
 
   <!-- underscore template for destination view -->
   <script type="text/template" id="destination-template">
-      <div class="parallax-container">
-        <div class="parallax"><img src="https://i.imgur.com/DtAdAcZ.jpg"></div>
-      </div>
-      <div class="section white">
-        <div class="row container">
-          <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
-          <button id="new-destination" onclick="showNewDestination()" class="btn" style="display:none">New Destination!</button>
-          <a href="/trips/new?destination=(<%%= currentDestination.destination %>)" id="choose-destination" class="btn">Choose Destination!</a>
+    <div class="parallax-container">
+      <div class="parallax"><img src="<%%= currentDestination.photos[0].image_url %>"></div>
+    </div>
+    <div class="section white">
+      <div class="row container">
+        <div class="row">
+          <%% currentDestination.photos.forEach((photo, index) => { %>
+            <%% if (index != 0) { %>
+            <div class="col s1">
+              <img src="<%%= photo.image_url %>" class="materialboxed responsive-img"> 
+            </div>
+            <%% } %>
+          <%% }); %>
+        </div>
+        <div class="row">
           <h2 class="header"><%%= currentDestination.city.name %></h2>
           <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
         </div>
       </div>
+    </div>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large teal">
+        <i class="large material-icons">menu</i>
+      </a>
+      <ul>
+        <li><a id="new-destination" class="btn-floating teal lighten-1" onclick="showNewDestination()" style="display:none"><i class="material-icons">autorenew</i></a></li>
+        <li><a id="choose-destination" class="btn-floating cyan darken-2" href="/trips/new?destination=(<%%= currentDestination.destination %>)&origin=(<%%= origin %>)"><i class="material-icons">airplanemode_active</i></a></li>
+        <li><a id="edit-search" class="btn-floating deep-orange lighten-1" onclick="editSearch()"><i class="material-icons">search</i></a></li>
+      </ul>
+    </div>
   </script>
 
 </main>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+<script src="/javascripts/autofill.js"></script>
 <script>
+  var origin;
   var destinationResults;
   var currentDestination;
   var currentDestinationIndex;
@@ -66,8 +86,9 @@
     var bigSize = ['https://i.imgur.com/nruvJeb.jpg', 'https://i.imgur.com/wAsxQzx.jpg', 'https://i.imgur.com/7atabBq.jpg', 'https://i.imgur.com/qDiMxsG.jpg', 'https://i.imgur.com/ugoD6Ng.jpg', 'https://i.imgur.com/GgXgiJD.jpg', 'https://i.imgur.com/nruvJeb.jpg', 'https://i.imgur.com/lxJP0AC.jpg', 'https://i.imgur.com/qff3Lhs.jpg'];
     $("#random").attr("src", bigSize[random]);
   });
+  
 
-
+  
   function render() {
     if (screenMode === "search") {
       return;
@@ -75,8 +96,8 @@
       $('#search').hide();
       $('#inspiration-search').html('Search');
       $('#destination-display').html(template({currentDestination})).show();
-      console.log(currentDestination);
       $('.parallax').parallax();
+      $('.materialboxed').materialbox();
       preloadNextDestination();
     } else if (screenMode === "editSearch") {
       $('#search').show();
@@ -87,12 +108,13 @@
   function submitInspirationSearch() { 
     if ( !$('#departure-city').val() ) return;
     $('#inspiration-search').html(preloader);
+    origin = $('#departure-city').val().slice(-4, -1);
     
     fetch('/inspirations/search', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ origin: $('#departure-city').val() })
+      body: JSON.stringify({ origin: $('#departure-city').val().slice(-4, -1) })
     })
     .then(res => res.json())
     .then(data => {
@@ -135,6 +157,7 @@
     screenMode = "editSearch";
     render();
   }
+
 </script>
 
 <%- include ../footer.ejs %>
