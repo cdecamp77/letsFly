@@ -30,10 +30,19 @@
   <!-- underscore template for destination view -->
   <script type="text/template" id="destination-template">
     <div class="parallax-container">
-      <div class="parallax"><img src="https://i.imgur.com/DtAdAcZ.jpg"></div>
+      <div class="parallax"><img src="<%%= currentDestination.photos[0].image_url %>"></div>
     </div>
     <div class="section white">
       <div class="row container">
+        <div class="row">
+          <%% currentDestination.photos.forEach((photo, index) => { %>
+            <%% if (index != 0) { %>
+            <div class="col s1">
+              <img src="<%%= photo.image_url %>" class="materialboxed responsive-img"> 
+            </div>
+            <%% } %>
+          <%% }); %>
+        </div>
         <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
         <button id="new-destination" onclick="showNewDestination()" class="btn" style="display:none">New Destination!</button>
         <a href="/trips/new?destination=(<%%= currentDestination.destination %>)" id="choose-destination" class="btn">Choose Destination!</a>
@@ -77,8 +86,9 @@
     var bigSize = ['https://i.imgur.com/nruvJeb.jpg', 'https://i.imgur.com/wAsxQzx.jpg', 'https://i.imgur.com/7atabBq.jpg', 'https://i.imgur.com/qDiMxsG.jpg', 'https://i.imgur.com/ugoD6Ng.jpg', 'https://i.imgur.com/GgXgiJD.jpg', 'https://i.imgur.com/nruvJeb.jpg', 'https://i.imgur.com/lxJP0AC.jpg', 'https://i.imgur.com/qff3Lhs.jpg'];
     $("#random").attr("src", bigSize[random]);
   });
+  
 
-
+  
   function render() {
     if (screenMode === "search") {
       return;
@@ -87,6 +97,7 @@
       $('#inspiration-search').html('Search');
       $('#destination-display').html(template({currentDestination})).show();
       $('.parallax').parallax();
+      $('.materialboxed').materialbox();
       preloadNextDestination();
     } else if (screenMode === "editSearch") {
       $('#search').show();
@@ -145,6 +156,7 @@
     screenMode = "editSearch";
     render();
   }
+
 </script>
 
 <%- include ../footer.ejs %>
