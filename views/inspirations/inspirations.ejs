@@ -43,23 +43,22 @@
             <%% } %>
           <%% }); %>
         </div>
-        <button id="edit-search" onclick="editSearch()" class="btn">Edit Search!</button>
-        <button id="new-destination" onclick="showNewDestination()" class="btn" style="display:none">New Destination!</button>
-        <a href="/trips/new?destination=(<%%= currentDestination.destination %>)" id="choose-destination" class="btn">Choose Destination!</a>
-        <h2 class="header"><%%= currentDestination.city.name %></h2>
-        <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
+        <div class="row">
+          <h2 class="header"><%%= currentDestination.city.name %></h2>
+          <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
+        </div>
       </div>
     </div>
-    <!-- <div class="fixed-action-btn">
+    <div class="fixed-action-btn">
       <a class="btn-floating btn-large teal">
         <i class="large material-icons">menu</i>
       </a>
       <ul>
-        <li><a id="new-destination" class="btn-floating green" onclick="showNewDestination()" style="display:none"><i class="material-icons">autorenew</i></a></li>
-        <li><a id="choose-destination" class="btn-floating blue" href="/trips/new?destination=(<%%= currentDestination.destination %>)"><i class="material-icons">airplanemode_active</i></a></li>
-        <li><a id="edit-search" class="btn-floating yellow darken-1" onclick="editSearch()"><i class="material-icons">search</i></a></li>
+        <li><a id="new-destination" class="btn-floating teal lighten-1" onclick="showNewDestination()" style="display:none"><i class="material-icons">autorenew</i></a></li>
+        <li><a id="choose-destination" class="btn-floating cyan darken-2" href="/trips/new?destination=(<%%= currentDestination.destination %>)"><i class="material-icons">airplanemode_active</i></a></li>
+        <li><a id="edit-search" class="btn-floating deep-orange lighten-1" onclick="editSearch()"><i class="material-icons">search</i></a></li>
       </ul>
-    </div> -->
+    </div>
   </script>
 
 </main>
