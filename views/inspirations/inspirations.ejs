@@ -55,7 +55,7 @@
       </a>
       <ul>
         <li><a id="new-destination" class="btn-floating teal lighten-1" onclick="showNewDestination()" style="display:none"><i class="material-icons">autorenew</i></a></li>
-        <li><a id="choose-destination" class="btn-floating cyan darken-2" href="/trips/new?destination=(<%%= currentDestination.destination %>)"><i class="material-icons">airplanemode_active</i></a></li>
+        <li><a id="choose-destination" class="btn-floating cyan darken-2" href="/trips/new?destination=(<%%= currentDestination.destination %>)&origin=(<%%= origin %>)"><i class="material-icons">airplanemode_active</i></a></li>
         <li><a id="edit-search" class="btn-floating deep-orange lighten-1" onclick="editSearch()"><i class="material-icons">search</i></a></li>
       </ul>
     </div>
@@ -66,6 +66,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 <script src="/javascripts/autofill.js"></script>
 <script>
+  var origin;
   var destinationResults;
   var currentDestination;
   var currentDestinationIndex;
@@ -107,6 +108,7 @@
   function submitInspirationSearch() { 
     if ( !$('#departure-city').val() ) return;
     $('#inspiration-search').html(preloader);
+    origin = $('#departure-city').val().slice(-4, -1);
     
     fetch('/inspirations/search', {
       method: 'POST',
