@@ -1,17 +1,18 @@
 
 ![logo](https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/lets_fly_logo.svg)
-## Description
 
- Need to book a flight? Use Lets Fly! 
+# Description
+
+ Need to book a flight? Use Let's Fly! 
  
  This easy to use app allows 
  travelers to book flights on the fly! 
  
  Feeling spontaneous? Lets Fly can 
- also choose a random destination for you, and if its not to your liking
+ also choose a random destination for you, and if it's not to your liking
  feel free to spin again for a new destination.
 
- ## Team Members
+ # Team Members
 
  <ul>
     <li>Christina Lin</li>
@@ -20,19 +21,19 @@
     <li>Christopher De Camp</li>
 </ul>
 
- ## Screenshots 
+ # Screenshots 
 
 ![Landing](https://i.imgur.com/T28IOge.png)
-
+#
 ![Search](https://i.imgur.com/fNYIa1f.png)
-
+#
 ![Results](https://i.imgur.com/lOPrz9y.png)
-
+#
 ![Inspiration](https://i.imgur.com/fmKPSdB.png)
-
+#
 ![404](https://i.imgur.com/2nhbPG6.png)
 
-## Technologies Used
+# Technologies Used
 
 <ul>
     <li>HTML</li>
@@ -43,10 +44,9 @@
     <li>Express Framework</li>
     <li>Amadeus API</li>
     <li>Google API</li>
-
 </ul>
 
-## Getting Started
+# Important Links
 
 [Deployed](https://lets--fly.herokuapp.com/) - View the completed project.
 
@@ -56,10 +56,7 @@
 
 [Pitch Deck](https://docs.google.com/presentation/d/1tIY1_krVOqYaF-ljIJymEr03NsUaT-LY0hK29apdBHk/edit?usp=sharing) - View our team's presentation.
 
-
-
-
-## Future Steps
+# Future Steps
 
 <ul>
     <li> Add a hotel search to pair with booked flights</li>

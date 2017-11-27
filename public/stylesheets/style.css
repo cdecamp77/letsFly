@@ -1,19 +1,14 @@
-/* body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-} */
 html {
   height: 100%;
 }
+
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   min-height: 100vh;
 }
+
 main {
   flex: 1 0 auto;
 }
@@ -34,76 +29,91 @@ main {
   background-size: cover !important; 
   background-color: rgb(173, 173, 173);
 }
+
 .error-content {
   align-items: flex-end; 
   display: flex; 
   justify-content: center;
   margin-top: 330px; 
 }
+
 #right {
   position: absolute;
   right: 32px;
 }
+
 #logo img{
   max-width: 300px;
   max-height: 390px;
   align-content: center;
   margin: 60px;
 }
+
 .brand-logo {
   margin-left: 20px;
   color: #275E63 !important;
 }
+
 nav, footer{
   background-color: #80cbc4 !important;
 }
+
 .footer-copyright{
   background-color: #80cbc4 !important;
 }
+
 #myform {
   text-align: center;
   padding: 5px;
   border: 1px dotted #ccc;
   margin: 2%;
 }
+
 .qty {
   width: 40px;
   height: 25px;
 }
+
 .container {
   padding: 0 0.5rem;
   margin: 0 auto;
   max-width: 100% !important;
   width: 98%;
 }
+
 .section {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
 .card {
   position: relative;
   overflow: hidden;
-    overflow-x: hidden;
-    overflow-y: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   margin: 0.5rem 0 1rem 0;
-    margin-top: 0.5rem;
-    margin-right: 0px;
-    margin-bottom: 0.3rem;
-    margin-left;
+  margin-top: 0.5rem;
+  margin-right: 0px;
+  margin-bottom: 0.3rem;
+  margin-left: ;
   background-color: #fff;
   border-radius: 2px;
 }
+
 .flight-card-title {
   font-weight: 300;
 }
+
 h1 {
   letter-spacing: -2px;
 }
+
 .footer-copyright {
   overflow: hidden;
   height: 50px;
   line-height: 50px;
 }
+
 table.highlight tbody tr:hover {
   background-color: #b2dfdb !important;
   color: #00695c !important;
@@ -112,7 +122,6 @@ table.highlight tbody tr:hover {
 .input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
   color: #4095A5 !important;
  }
-
 /* label underline focus color */
  .input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #4095A5 !important;
@@ -132,14 +141,6 @@ table.highlight tbody tr:hover {
  .input-field .prefix.active {
   color: #ED6237;
  }
+
 input.qtyplus { width:25px; height:25px;}
 input.qtyminus { width:25px; height:25px;}
-
-/* #search {
-  height: 100%;
-  
-  background-image: url('https://i.imgur.com/lxJP0AC.jpg');
-  background-position: center center;
-  background-size: cover !important;
-  background-repeat: no-repeat;  
-} */

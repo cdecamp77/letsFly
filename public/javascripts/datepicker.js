@@ -1,15 +1,14 @@
 // pops up a calendar for selecting dates    
-
 $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year,
-        today: 'Today',
-        clear: 'Clear',
-        close: 'Ok',
-        closeOnSelect: false, // Close upon selecting a date,
-        format: 'yyyy-mm-dd'
-    });
+  selectMonths: true,
+  selectYears: 15,
+  today: 'Today',
+  clear: 'Clear',
+  close: 'Ok',
+  closeOnSelect: false,
+  format: 'yyyy-mm-dd'
+});
 
-    $(document).ready(function() {
-    $('select').material_select();
-  });
+$(document).ready(function() {
+  $('select').material_select();
+});
