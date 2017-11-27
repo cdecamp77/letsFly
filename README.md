@@ -11,6 +11,8 @@
  also choose a random destination for you, and if it's not to your liking
  feel free to spin again for a new destination.
 
+ [Check it out!](https://lets--fly.herokuapp.com/)
+
  # Team Members
 
  <ul>
@@ -48,6 +50,13 @@
 [Trello](https://trello.com/b/LrxkQ0RY/lets-fly) - View our team's planning process.
 
 [Pitch Deck](https://docs.google.com/presentation/d/1tIY1_krVOqYaF-ljIJymEr03NsUaT-LY0hK29apdBHk/edit?usp=sharing) - View our team's presentation.
+
+# API Endpoints
+
+| Path/URI | Purpose |
+|------------------|-----------------|
+|  /api/trips          | List all trips (JSON) |
+|  /api/trips/:id      | Show a single trip (JSON) | 
 
 # Future Steps
 
