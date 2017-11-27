@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
+
 // load the env vars
 require('dotenv').config();
 
@@ -21,7 +22,6 @@ var oauth = require('./routes/oauth');
 var trips = require('./routes/trips');
 var api = require('./routes/api');
 var inspirations = require('./routes/inspirations');
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,7 +47,6 @@ app.use('/api', api);
 app.use('/', trips);
 app.use('/', oauth);
 app.use('/', inspirations);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
