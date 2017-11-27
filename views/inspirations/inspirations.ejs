@@ -39,10 +39,10 @@
           <h2 class="header"><%%= currentDestination.city.name %></h2>
         </div>
         <div class="row">
-          <div class="col s9">
+          <div class="col s12 m9">
             <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
           </div>
-          <div class="col s3">
+          <div class="col s12 m3">
             <%% for (var photoIdx = 1; photoIdx < currentDestination.photos.length; photoIdx += 2) { %>
               <div class="row">
                 <div class="col s6">
