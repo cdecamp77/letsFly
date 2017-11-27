@@ -3,9 +3,11 @@
     <div class="footer-copyright">
       <div class="container white-text">
         © 2017 Copyright Let's Fly
+        <% if (user) { %>
         <a class="white-text text-lighten-4 right" href="/trips">Dashboard&nbsp;&nbsp;</a>
         <a class="white-text text-lighten-4 right" href="/inspirations">Get Inspired &nbsp;&nbsp;</a> 
         <a class="white-text text-lighten-4 right" href="/trips/new">Trip Search&nbsp;&nbsp;</a>
+        <% } %>
       </div>
     </div>
   </footer>
