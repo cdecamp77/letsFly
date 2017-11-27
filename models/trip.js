@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Flight = require('./flight');
 
-
 var tripSchema = new Schema ({
   departureCity: {type: String},
   arrivalCity: {type:String},
