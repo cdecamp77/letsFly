@@ -18,11 +18,11 @@
                 </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="departure-date" type="text" class="datepicker" name="departureDate" value="<%= trip.departureDate %>">
+                    <input id="departure-date" type="text" class="datepicker" name="departureDate" value="<%= trip.departureDate.getFullYear().toString() %>-<%= (trip.departureDate.getMonth() + 1 < 10)? ('0' + (trip.departureDate.getMonth() + 1).toString()): (trip.departureDate.getMonth() + 1).toString() %>-<%= (trip.departureDate.getDate() < 10)? ('0' + trip.departureDate.getDate().toString()): trip.departureDate.getDate().toString() %>">
                     <label for="departure-date">Departure Date</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="return-date" type="text" class="datepicker" name="returnDate" value="<%= trip.returnDate %>">
+                    <input id="return-date" type="text" class="datepicker" name="returnDate" value="<%= trip.returnDate.getFullYear().toString() %>-<%= (trip.returnDate.getMonth() + 1 < 10)? ('0' + (trip.returnDate.getMonth() + 1).toString()): (trip.returnDate.getMonth() + 1).toString() %>-<%= (trip.returnDate.getDate() < 10)? ('0' + trip.returnDate.getDate().toString()): trip.returnDate.getDate().toString() %>">
                     <label for="return-date">Return Date</label>
                 </div>
             </div>

@@ -13,6 +13,8 @@ router.put('/trips/:id/edit/flights/results', isLoggedIn, tripsCtrl.editTripAndG
 router.post('/trips/:id/edit', isLoggedIn, tripsCtrl.editTripBookedFlights);
 router.delete('/trips/:id', isLoggedIn, tripsCtrl.deleteTrip);
 
+router.get('/error', tripsCtrl.error);
+
 module.exports = router;
 
 function isLoggedIn(req, res, next) {

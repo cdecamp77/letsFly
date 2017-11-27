@@ -10,7 +10,10 @@ function showInspirationPage (req, res) {
 function getInspirationData (req, res) {
     var body = req.body;
     request({ url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${process.env.AMADEUS_TOKEN}&origin=${body.origin}`}, (err, response, body) => {
-        var searchResults = JSON.parse(body);   
+        var searchResults = JSON.parse(body);
+        if (searchResults.status === 400) {
+            return res.json(searchResults).status(404);
+        }   
         request(`http://api.sandbox.amadeus.com/v1.2/location/${searchResults.results[0].destination}/?apikey=${process.env.AMADEUS_TOKEN}`, (err, response, body) => {
             searchResults.results[0].city = JSON.parse(body).city;
             var state;
