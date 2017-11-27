@@ -99,6 +99,10 @@ function deleteTrip(req, res) {
     });
 }
 
+function error(req, res) {
+    res.render('./404.ejs');
+}
+
 module.exports = {
     root, 
     tripSearch,
@@ -108,5 +112,6 @@ module.exports = {
     editTrip,
     editTripAndGetNewFlights,
     editTripBookedFlights,
-    deleteTrip
+    deleteTrip,
+    error
 }

@@ -47,6 +47,9 @@ function submitInspirationSearch() {
     })
     .then(res => res.json())
     .then(data => {
+      if (data.status === 400) {
+        window.location.pathname = "/error";
+      }
       destinationResults = data.results;
       currentDestinationIndex = 0;
       currentDestination = destinationResults[currentDestinationIndex];
