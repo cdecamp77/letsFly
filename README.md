@@ -1,5 +1,5 @@
 
-![logo](https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/lets_fly_logo.svg)
+<img src="https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/lets_fly_logo.svg" alt="Logo" style="width: 200px;"/>
 
 # Description
 
