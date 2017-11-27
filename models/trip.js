@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Flight = require('./flight');
-var Hotel = require('./hotel');
+
 
 var tripSchema = new Schema ({
   departureCity: {type: String},
@@ -10,7 +10,6 @@ var tripSchema = new Schema ({
   returnDate: Date,
   travelers: {type: String},
   flights: [Flight],
-  hotels: [Hotel]
   },
   {
     timestamps: true
