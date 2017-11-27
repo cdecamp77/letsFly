@@ -22,15 +22,7 @@
 
  # Screenshots 
 
-![Landing](https://i.imgur.com/T28IOge.png)
-#
-![Search](https://i.imgur.com/fNYIa1f.png)
-#
-![Results](https://i.imgur.com/lOPrz9y.png)
-#
-![Inspiration](https://i.imgur.com/fmKPSdB.png)
-#
-![404](https://i.imgur.com/2nhbPG6.png)
+![Imgur](https://i.imgur.com/bdTuVhj.gif)
 
 # Technologies Used
 
@@ -43,6 +35,8 @@
     <li>Express Framework</li>
     <li>Amadeus API</li>
     <li>Google API</li>
+    <li>500px API</li>
+    <li>Wikipedia API</li>
 </ul>
 
 # Important Links
