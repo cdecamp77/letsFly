@@ -17,7 +17,7 @@ function getInspirationData (req, res) {
             !searchResults.results[0].city.state ? state = '' : state = `, ${searchResults.results[0].city.state}`;
             request(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(searchResults.results[0].city.name)}`, (err, response, body) => {
                 searchResults.results[0].description = JSON.parse(body);
-                request(`https://api.500px.com/v1/photos/search?consumer_key=${process.env.FIVEHUNDREDPX_CONSUMER_KEY}&rpp=10&sort=_score&image_size=1080,1600,2048&term=${searchResults.results[0].city.name + state}`, (err, response, photos) => {
+                request(`https://api.500px.com/v1/photos/search?consumer_key=${process.env.FIVEHUNDREDPX_CONSUMER_KEY}&rpp=9&sort=rating&image_size=1080,1600,2048&only=City+and+Architecture,Street&term=${searchResults.results[0].city.name + state}`, (err, response, photos) => {
                     searchResults.results[0].photos = JSON.parse(photos).photos;
                     res.json(searchResults).status(200);
                 });
@@ -35,7 +35,7 @@ function updateInspirationData (req, res) {
         !updatedDestination.city.state ? state = '' : state = `, ${updatedDestination.city.state}`;
         request(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(updatedDestination.city.name)}`, (err, response, body) => {
             updatedDestination.description = JSON.parse(body);
-            request(`https://api.500px.com/v1/photos/search?consumer_key=${process.env.FIVEHUNDREDPX_CONSUMER_KEY}&rpp=10&sort=_score&image_size=1080,1600,2048&term=${updatedDestination.city.name + state}`, (err, response, photos) => {
+            request(`https://api.500px.com/v1/photos/search?consumer_key=${process.env.FIVEHUNDREDPX_CONSUMER_KEY}&rpp=9&sort=rating&image_size=1080,1600,2048&only=City+and+Architecture,Street&term=${updatedDestination.city.name + state}`, (err, response, photos) => {
                 updatedDestination.photos = JSON.parse(photos).photos;
                 res.json(updatedDestination).status(200);
             });

@@ -21,7 +21,7 @@
         <a href="/" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="/trips/new">Trip Search</a></li>
-          <li><a href="/inspirations">Random Vacation</a></li>
+          <li><a href="/inspirations">Get Inspired</a></li>
           <% if (user) { %>
             <li><a href="/trips">Dashboard</a></li>
             <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
@@ -29,18 +29,18 @@
             <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
           <% } %>
         </ul>
-        <ul class="side-nav" id="mobile-demo">
-          <% if (user) { %>
-          <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
-          <% } else { %>
-          <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
-          <% } %>
-          <li><a href="/trips/new">Flight Search</a></li>
-          <li><a href="/inspirations">Random Vacation</a></li>
-          <li><a href="/trips">Dashboard</a></li>
-        </ul>
       </div>
     </nav>
+    <ul class="side-nav" id="mobile-demo">
+      <% if (user) { %>
+      <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+      <li><a href="/trips">Dashboard</a></li>
+      <% } else { %>
+      <li><a href="/auth/google"><i class="material-icons left">person</i>Log In</a></li>
+      <% } %>
+      <li><a href="/trips/new">Trip Search</a></li>
+      <li><a href="/inspirations">Get Inspired</a></li>
+    </ul>
   </header>
   <main>
 
