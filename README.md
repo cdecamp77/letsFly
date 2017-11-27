@@ -1,5 +1,4 @@
-
-![logo](https://s3-us-west-1.amazonaws.com/paperclipp/users/images/000/000/001/original/letsFly/lets_fly_logo.svg)
+![Logo](https://i.imgur.com/1p2OFMn.png)
 
 # Description
 
