@@ -36,17 +36,33 @@
     <div class="section white">
       <div class="row container">
         <div class="row">
-          <%% currentDestination.photos.forEach((photo, index) => { %>
-            <%% if (index != 0) { %>
-            <div class="col s1">
-              <img src="<%%= photo.image_url %>" class="materialboxed responsive-img"> 
-            </div>
-            <%% } %>
-          <%% }); %>
+          <h2 class="header"><%%= currentDestination.city.name %></h2>
         </div>
         <div class="row">
-          <h2 class="header"><%%= currentDestination.city.name %></h2>
-          <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
+          <div class="col s9">
+            <p class="grey-text text-darken-3 lighten-3"><%%= currentDestination.description.query.pages[Object.keys(currentDestination.description.query.pages)[0]].extract %></p>
+          </div>
+          <div class="col s3">
+            <!-- <div class="row"> -->
+              <%% for (var photoIdx = 1; photoIdx < currentDestination.photos.length; photoIdx += 2) { %>
+                <div class="row">
+                  <div class="col s6">
+                    <img src="<%%= currentDestination.photos[photoIdx].image_url %>" class="materialboxed responsive-img"> 
+                  </div>
+                  <div class="col s6">
+                    <img src="<%%= currentDestination.photos[(photoIdx + 1)].image_url %>" class="materialboxed responsive-img"> 
+                  </div>
+                </div>
+              <%% } %>
+              <!-- <%% currentDestination.photos.forEach((photo, index) => { %>
+                <%% if (index != 0) { %>
+                <div class="col s6">
+                  <img src="<%%= photo.image_url %>" class="materialboxed responsive-img"> 
+                </div>
+                <%% } %>
+              <%% }); %> -->
+            <!-- </div> -->
+          </div>
         </div>
       </div>
     </div>
